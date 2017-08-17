@@ -1,6 +1,10 @@
 # this is my first blog program
 
-> heading to become a full-stack programer!
+> hope to become a full-stack programer!
+
+## Technology Stack
+
+vue.js vue-router python2 django mysql
 
 ## Build Setup
 
