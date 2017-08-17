@@ -17,7 +17,7 @@ front:
 ├── node_modules  --依赖包  
 ├── package.json  --依赖项  
 ├── README.md  
-├── src  --源码
+├── src  --源码  
 └── static  --本地测试静态资源  
 back:  
 configure  
