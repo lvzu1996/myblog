@@ -62,6 +62,11 @@ DATABASES = {
     }
 }
 
+
+# django's auto build mysql table
+python manage.py makemigrations myapp
+python manage.py migrate
+
 #run this programe
 cd lvzuBlog
 python manage.py runserver
