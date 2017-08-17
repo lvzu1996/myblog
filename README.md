@@ -10,30 +10,30 @@ vue.js vue-router python2 django mysql
 
 ## Program Tree
 front:  
-├── build  
+├── build --编译配置  
 ├── config  
-├── dist  
-├── index.html  
-├── node_modules  
-├── package.json  
+├── dist  --编译后引用目录
+├── index.html  --本地测试页面
+├── node_modules  --依赖包
+├── package.json  --依赖项
 ├── README.md  
-├── src  
-└── static  
+├── src  --源码
+└── static  --本地测试静态资源
 back:  
 configure  
 ├── __init__.py  
-├── settings.py  
-├── urls.py  
+├── settings.py  --django项目配置文件
+├── urls.py  --django项目路由配置
 ├── wsgi.py  
 apps  
 ├── admin.py  
 ├── apps.py  
 ├── __init__.py  
 ├── migrations  
-├── models.py  
+├── models.py  --model文件，用于自动生成mysql表
 ├── tests.py  
 ├── urls.py  
-├── views.py  
+├── views.py  --app页面，本例中展示了两个接口
 
 
 ## Build Setup
