@@ -50,7 +50,7 @@ npm install
 npm run build
 
 # mysql configure
-lvzuBlog/settings.py  
+myproject/settings.py  
 
 DATABASES = {
     'default': {
@@ -68,7 +68,7 @@ python manage.py makemigrations myapp
 python manage.py migrate
 
 #run this programe
-cd lvzuBlog
+cd myproject
 python manage.py runserver
 ```
 

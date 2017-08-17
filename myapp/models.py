@@ -11,3 +11,14 @@ class Book(models.Model):
 
     def __unicode__(self):
         return self.book_name
+
+class Pictures(models.Model):
+    pic_name = models.CharField(max_length=64)
+    pic_url = models.URLField()
+    add_time = models.DateTimeField(auto_now_add=True)
+
+    def __unicode__(self):
+        return self.pic_name
+
+# class Accounts(models.Model):
+#     username = models.Q
