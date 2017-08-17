@@ -25,7 +25,7 @@ configure
 ├── settings.py  
 ├── urls.py  
 ├── wsgi.py  
-apps
+apps  
 ├── admin.py  
 ├── apps.py  
 ├── __init__.py  
