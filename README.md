@@ -1,10 +1,40 @@
 # this is my first blog program
 
-> hope to become a full-stack programer!
+>@author:lvzu  
+>@date:2017/08/17  
+>@say something : hope to become a full-stack programer!  
 
 ## Technology Stack
 
 vue.js vue-router python2 django mysql
+
+## Program Tree
+front:  
+├── build  
+├── config  
+├── dist  
+├── index.html  
+├── node_modules  
+├── package.json  
+├── README.md  
+├── src  
+└── static  
+back:  
+configure  
+├── __init__.py  
+├── settings.py  
+├── urls.py  
+├── wsgi.py  
+apps
+├── admin.py  
+├── apps.py  
+├── __init__.py  
+├── migrations  
+├── models.py  
+├── tests.py  
+├── urls.py  
+├── views.py  
+
 
 ## Build Setup
 
