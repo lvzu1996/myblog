@@ -1,6 +1,12 @@
 <template>
-  <div class="mine-home" :style="{backgroundImage: 'url(' + bg_url + ')'}">
-
+  <div>
+    <div class="mine-home" :style="{backgroundImage: 'url(' + bg_url + ')'}">
+      <div class="overlay" :style="{backgroundImage: 'url(' + overlay_url + ')'}">
+        <div class="welcome move-lvzu">
+          Hello, welcome !
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -11,6 +17,7 @@ export default {
     return {
       picList: [],
       bg_url:'',
+      overlay_url:'',
     }
   },
 
@@ -30,21 +37,21 @@ export default {
           if(i.fields.pic_name == 'background'){
             t.bg_url = i.fields.pic_url
           }
+          if(i.fields.pic_name == 'overlay'){
+            t.overlay_url = i.fields.pic_url
+          }
         }
         var img = new Image();
         img.src = t.bg_url;
         img.onload = function(){
           $('.mine-home').css("background-position",'center')
           $('.mine-home').css('height',$(window).height())
-
+          $('.overlay').css('height',$(window).height())
         };
       })
 
   },
 
-  methods: {
-
-  }
 }
 </script>
 
@@ -52,9 +59,37 @@ export default {
 <style lang="css" scoped>
 
 .mine-home{
+  position: absolute;
   width: 100%;
-  height: 1500px;
-  background-repeat: no-repeat;
+  display: block;
+}
+.overlay{
+  position: 0 !important;
+  display: block;
+  position: absolute;
+  width: 100%;
+  background-size: 100%;
+}
+.welcome{
+  margin-top: 20%;
+  font-size: 80px;
+  color:#ffffff;
 }
 
+
+@-webkit-keyframes move-lvzu {
+    0% {
+        opacity: 0;
+        /*background-color: #EEECE8;*/
+        -webkit-transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.move-lvzu {
+    -webkit-animation: move-lvzu 1.5s cubic-bezier(.4, 0, .2, 1) 0s 1;
+    animation: move-lvzu 1.5s cubic-bezier(.4, 0, .2, 1) 0s 1;
+}
 </style>
