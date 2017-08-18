@@ -1,5 +1,5 @@
 <template>
-  <div class="mine-home" :style="{backgroundImage: 'url(' + bg_url + ')',backgroundSize:'300px',backgroundRepeat:'no-repeat'}">
+  <div class="mine-home" :style="{backgroundImage: 'url(' + bg_url + ')'}">
 
   </div>
 </template>
@@ -9,7 +9,6 @@ export default {
   name: 'home',
   data () {
     return {
-      bookList: [],
       picList: [],
       bg_url:'',
     }
@@ -17,12 +16,12 @@ export default {
 
   mounted: function() {
     const t = this
+
     fetch('http://127.0.0.1:8000/api/get_pic_urls', {
         method: 'get',
       })
       .then(re => re.json())
       .then(re => {
-        console.log(re.list);
         for(let i of re.list){
           t.picList.push({
             pic_name:i.fields.pic_name,
@@ -32,7 +31,15 @@ export default {
             t.bg_url = i.fields.pic_url
           }
         }
+        var img = new Image();
+        img.src = t.bg_url;
+        img.onload = function(){
+          $('.mine-home').css("background-position",'center')
+          $('.mine-home').css('height',$(window).height())
+
+        };
       })
+
   },
 
   methods: {
@@ -45,8 +52,9 @@ export default {
 <style lang="css" scoped>
 
 .mine-home{
-  width: 200%;
-  height: 2000px;
+  width: 100%;
+  height: 1500px;
+  background-repeat: no-repeat;
 }
 
 </style>

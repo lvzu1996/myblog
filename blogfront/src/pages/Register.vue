@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="register-vue">
-  <div class="main">
+  <div class="main-part">
     <div class="ope">
       <a class="normal"
       v-bind:class="{'active':isLog}"
@@ -56,7 +56,7 @@
         <svg class="icon bef-icon" aria-hidden="true">
           <use xlink:href="#icon-shouji"></use>
         </svg>
-          <input class = "us-pd-input" maxlength="11" @blur="verify('username',register_username)" spellcheck="false" v-model="register_username" placeholder="手机号">
+          <input class = "us-pd-input" maxlength="11" @blur="_verify" spellcheck="false" v-model="register_username" placeholder="手机号">
       </div>
       <div v-show="verify_code_show" class="us-pw-input-pre" :class="{'move-lvzu-2':verify_code_show}">
         <svg class="icon bef-icon" aria-hidden="true">
@@ -103,6 +103,8 @@ export default {
   name: 'Register',
   data() {
     return {
+      picList: [],
+      bg_url:'',
       //绑定登录界面的input值
       log_username: '',
       log_password: '',
@@ -126,6 +128,26 @@ export default {
     }
   },
 
+  mounted: function() {
+    const t = this
+    fetch('http://127.0.0.1:8000/api/get_pic_urls', {
+        method: 'get',
+      })
+      .then(re => re.json())
+      .then(re => {
+        console.log(re.list);
+        for(let i of re.list){
+          t.picList.push({
+            pic_name:i.fields.pic_name,
+            pic_url:i.fields.pic_url
+          })
+          if(i.fields.pic_name == 'background'){
+            t.bg_url = i.fields.pic_url
+          }
+        }
+      })
+  },
+
   methods: {
     //点击登录
     setLog: function() {
@@ -133,8 +155,7 @@ export default {
         this.setNull();
         this.isLog = true;
         this.verify_code_show = false;
-        // $(".main").css("height","550px");
-        // $("#after-move").css("transform","translateY(-15px)");
+
         return;
       }
     },
@@ -155,8 +176,7 @@ export default {
       this.register_password = '';
       this.register_verifycode = '';
     },
-    // $(".main").css("height", "600px");
-    // $("#after-move").css("transform", "translateY(25px)");
+
     _login: function() {
       const t = this
       if(t.log_username.length!=11){
@@ -194,6 +214,20 @@ export default {
             return
           }
         })
+    },
+    _verify:function () {
+      const  t = this
+      if(t.register_username.length!=11){
+        if(t.register_username.length == 0){
+          return
+        }
+        this.$message.error('您的手机号输入有误，请重新输入');
+        t.register_username = ''
+        return
+      }
+      $(".main-part").css("height", "600px");
+      $("#after-move").css("transform", "translateY(25px)");
+      t.verify_code_show = true
     },
     _getVerifyCode: function() {
       const t = this
@@ -249,8 +283,10 @@ a {
     text-decoration: none;
 }
 
+
+
 //主登录框
-.main {
+.main-part {
     width: 400px;
     height: 550px;
     overflow: hidden;
