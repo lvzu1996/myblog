@@ -20,5 +20,11 @@ class Pictures(models.Model):
     def __unicode__(self):
         return self.pic_name
 
-# class Accounts(models.Model):
-#     username = models.Q
+class Accounts(models.Model):
+    username = models.CharField(max_length=11)
+    password = models.CharField(max_length=16)
+    nickname = models.CharField(max_length=16)
+    register_time = models.DateTimeField(auto_now_add=True)
+
+    def __unicode__(self):
+        return self.username

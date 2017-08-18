@@ -75,7 +75,7 @@
 
   <div id="after-move">
     <div class="button">
-      <el-button id="reg_but" class="login-button" type="info" size='large'>注 册</el-button>
+      <el-button id="reg_but" class="login-button" type="info" size='large' @click="_register">注 册</el-button>
     </div>
     <p class="sign-up-msg">点击 “注册” 即表示您同意并愿意遵守<br>
       <a style="color:#58B7FF;" href="#">用户协议</a>和
@@ -154,6 +154,7 @@ export default {
       this.register_nickname = '';
       this.register_username = '';
       this.register_password = '';
+      this.register_verifycode = '';
     },
     //验证函数,type为验证对象种类,value为传入的v-model值
     verify: function(type, value) {
@@ -181,6 +182,24 @@ export default {
     },
     login: function() {
 
+    },
+    _register:function () {
+      const t = this
+      console.log('reg');
+      fetch('http://127.0.0.1:8000/api/add_account', {
+          method: 'post',
+            body: 'username='+ t.register_username+'&password='+t.register_password+'&nickname='+t.register_nickname,
+            headers: {
+              "Accept": "application/json",
+              "Content-Type": "application/x-www-form-urlencoded"
+            },
+        })
+        .then(re => re.json())
+        .then(re => {
+          if(re.message=='success'){
+            //提示注册成功并跳转
+          }
+        })
     },
   },
 }
