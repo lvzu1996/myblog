@@ -38,9 +38,14 @@ def add_pic_urls(request):
 @csrf_protect
 @csrf_exempt
 @require_http_methods(["POST"])
-def add_account(request):
+def account_register(request):
     response = {}
     try:
+        hasAccount = Accounts.objects.filter(username=request.POST['username'])
+        if(hasAccount):
+            response['msg'] = 'registerd username'
+            response['error_num'] = 0
+            return JsonResponse(response)
         account = Accounts(username=request.POST['username'],password=request.POST['password'],nickname=request.POST['nickname'])
         account.save()
         response['msg'] = 'success'
@@ -48,5 +53,34 @@ def add_account(request):
     except  Exception,e:
         response['msg'] = str(e)
         response['error_num'] = 1
-        response['test'] = request.POST.get('username')
+        # response['test'] = request.POST.get('username')
+    return JsonResponse(response)
+
+@csrf_protect
+@csrf_exempt
+@require_http_methods(["POST"])
+def account_login(request):
+    response = {}
+    try:
+        hasAccount = Accounts.objects.get(username=request.POST['username'])
+        if(hasAccount):
+            if(hasAccount.password==request.POST['password']):
+                response['msg'] = 'success'
+                response['error_num'] = 0
+                # response['test'] = hasAccount.password
+                return JsonResponse(response)
+            response['msg'] = 'passwordError'
+            response['error_num'] = 0
+            return JsonResponse(response)
+        # response['msg'] = 'notRegisterd'
+        # response['error_num'] = 0
+        # return JsonResponse(response)
+
+    except  Exception,e:
+        # response['msg'] = str(e)
+        # response['error_num'] = 1
+        # # response['test'] = request.POST.get('username')
+        response['msg'] = 'notRegisterd'
+        response['error_num'] = 0
+        return JsonResponse(response)
     return JsonResponse(response)

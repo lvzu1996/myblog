@@ -32,7 +32,7 @@
       <span class= "login-problem">登录遇到问题?</span>
     </div>
     <div class="button">
-      <el-button class="login-button" type="info" size='large' @click="verify">登 录</el-button>
+      <el-button class="login-button" type="info" size='large' @click="_login">登 录</el-button>
     </div>
     <div class="others">
       <h6 class="social-text">社交账号登录</h6>
@@ -63,7 +63,7 @@
           <use xlink:href="#icon-yanzhengma"></use>
         </svg>
           <input class = "us-pd-input" style="width:100px;float:left;margin-left:8px;"maxlength="6" type = 'text' spellcheck="false" v-model="register_verifycode" placeholder="验证码">
-            <el-button class="get-verifycode" type="info">获取验证码</el-button>
+            <el-button class="get-verifycode" type="info" @click="_getVerifyCode">获取验证码</el-button>
       </div>
       <div class="us-pw-input-pre">
         <svg class="icon bef-icon" aria-hidden="true">
@@ -155,37 +155,68 @@ export default {
       this.register_password = '';
       this.register_verifycode = '';
     },
-    //验证函数,type为验证对象种类,value为传入的v-model值
-    verify: function(type, value) {
-      if (type === 'username') {
-        if (!value) {
-          return;
-        }
-        //后期手机号格式修改
-        // if (value.length != 11) {
-        //   if(this.user_msg_showing){
-        //     console.log("1");
-        //     return;
-        //   }
-        //   let _this = this;
-        //   this.user_msg_showing = true;
-        //   setTimeout(function () {
-        //     _this.user_msg_showing = false;
-        //   },3000)
-        //  this.$message('手机格式错误');
-        // }
-        this.verify_code_show = true;
-        $(".main").css("height", "600px");
-        $("#after-move").css("transform", "translateY(25px)");
+    // $(".main").css("height", "600px");
+    // $("#after-move").css("transform", "translateY(25px)");
+    _login: function() {
+      const t = this
+      if(t.log_username.length!=11){
+        this.$message.error('您的手机号输入有误，请重新输入');
+        t.log_username = ''
+        return
       }
+      fetch('http://127.0.0.1:8000/api/account_login', {
+          method: 'post',
+          body: 'username=' + t.log_username + '&password=' + t.log_password,
+          headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+        })
+        .then(re => re.json())
+        .then(re => {
+          if(re.msg == 'success'){
+            this.$message({
+              message: '登录成功！',
+              type: 'success'
+            });
+            //后续做跳转
+            return
+          }else if (re.msg =='passwordError') {
+            this.$message.error('账号密码有误，请重新输入');
+            t.log_password = ''
+            return
+          }else if (re.msg == 'notRegisterd') {
+            this.$message({
+              message: '此用户名未注册，请先注册',
+              type: 'warning'
+            });
+            t.setReg();
+            return
+          }
+        })
     },
-    login: function() {
-
+    _getVerifyCode: function() {
+      const t = this
+      if (t.register_username.length != 11) {
+        this.$message.error('您的手机号输入有误，请重新输入');
+        t.register_username = ''
+        return
+      }
+      setTimeout(function() {
+        t.register_verifycode = 123456
+      }, 3000)
     },
     _register: function() {
       const t = this
-      console.log('reg');
-      fetch('http://127.0.0.1:8000/api/add_account', {
+      if (t.register_nickname.length < 7) {
+        this.$message.error('您输入的昵称过短，长度应大于6');
+        return
+      }
+      if (t.register_username.length != 11) {
+        this.$message.error('您的手机号输入有误，请重新输入');
+        return
+      }
+      fetch('http://127.0.0.1:8000/api/account_register', {
           method: 'post',
           body: 'username=' + t.register_username + '&password=' + t.register_password + '&nickname=' + t.register_nickname,
           headers: {
@@ -195,8 +226,16 @@ export default {
         })
         .then(re => re.json())
         .then(re => {
-          if (re.message == 'success') {
-            //提示注册成功并跳转
+          if (re.msg == 'success') {
+            this.$message({
+              message: '恭喜您，注册成功！',
+              type: 'success'
+            });
+          } else if (re.msg == 'registerd username') {
+            this.$message({
+              message: '该用户名已被注册',
+              type: 'warning'
+            });
           }
         })
     },
