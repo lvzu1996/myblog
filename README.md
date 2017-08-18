@@ -6,7 +6,7 @@
 
 ## Technology Stack
 
-vue.js vue-router python2 django mysql
+vue.js python2 django mysql
 
 ## Program Tree
 front:  

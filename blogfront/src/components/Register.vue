@@ -98,7 +98,6 @@
 </template>
 
 <script>
-
 export default {
 
   name: 'Register',
@@ -121,9 +120,9 @@ export default {
       //注册界面下方社交账号注册icon
       register_icon_hrefs: ['#icon-ziyuan', '#icon-weibo', '#icon-shejiao-twitter', '#icon-shejiao1', '#icon-shejiao-github'],
       //表示注册界面手机号格式错误message弹窗是否是激活状态 若是激活状态则不会产生二次弹窗
-      user_msg_showing:false,
+      user_msg_showing: false,
       //表示输入手机验证码的框显不显示
-      verify_code_show :false,
+      verify_code_show: false,
     }
   },
 
@@ -159,7 +158,7 @@ export default {
     //验证函数,type为验证对象种类,value为传入的v-model值
     verify: function(type, value) {
       if (type === 'username') {
-        if(!value){
+        if (!value) {
           return;
         }
         //后期手机号格式修改
@@ -176,27 +175,27 @@ export default {
         //  this.$message('手机格式错误');
         // }
         this.verify_code_show = true;
-        $(".main").css("height","600px");
-        $("#after-move").css("transform","translateY(25px)");
+        $(".main").css("height", "600px");
+        $("#after-move").css("transform", "translateY(25px)");
       }
     },
     login: function() {
 
     },
-    _register:function () {
+    _register: function() {
       const t = this
       console.log('reg');
       fetch('http://127.0.0.1:8000/api/add_account', {
           method: 'post',
-            body: 'username='+ t.register_username+'&password='+t.register_password+'&nickname='+t.register_nickname,
-            headers: {
-              "Accept": "application/json",
-              "Content-Type": "application/x-www-form-urlencoded"
-            },
+          body: 'username=' + t.register_username + '&password=' + t.register_password + '&nickname=' + t.register_nickname,
+          headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
         })
         .then(re => re.json())
         .then(re => {
-          if(re.message=='success'){
+          if (re.message == 'success') {
             //提示注册成功并跳转
           }
         })
@@ -427,10 +426,10 @@ a {
             }
         }
     }
-    .get-verifycode{
-      width: 100px;
-      margin-top: 5px;
-      height: 40px;
+    .get-verifycode {
+        width: 100px;
+        margin-top: 5px;
+        height: 40px;
     }
     //注册按键样式
     .button {
@@ -543,7 +542,7 @@ a {
     -webkit-animation: move-lvzu-2 0.5s cubic-bezier(.4, 0, .2, 1) 0s 1;
     animation: move-lvzu-2 0.5s cubic-bezier(.4, 0, .2, 1) 0s 1;
 }
-a:hover{
-  cursor:pointer
+a:hover {
+    cursor: pointer;
 }
 </style>
