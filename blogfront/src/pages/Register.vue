@@ -135,7 +135,6 @@ export default {
       })
       .then(re => re.json())
       .then(re => {
-        console.log(re.list);
         for(let i of re.list){
           t.picList.push({
             pic_name:i.fields.pic_name,

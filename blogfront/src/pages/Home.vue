@@ -2,19 +2,73 @@
   <div>
     <div class="mine-home" :style="{backgroundImage: 'url(' + bg_url + ')'}">
       <div class="overlay" :style="{backgroundImage: 'url(' + overlay_url + ')'}">
-        <div class="welcome move-lvzu">
-          Hello, welcome !
+
+        <transition name="fade">
+          <div v-if="show_welcome" class="welcome1 move-lvzu">
+            Hello, welcome !
+          </div>
+          </transition>
+          <transition name="fade">
+            <div v-if="show_name" class="welcome1">
+              what is your name ?
+              <div >
+                <input type="text" @keydown.enter="_submitName"  v-model="user_name" class="comment-input"></input>
+              </div>
+            </div>
+          </transition>
+          <transition name="fade">
+          <div v-if="show_time" class="my-time">
+            {{now_time}}
+          </div>
+        </transition>
+
+      <transition name="fade">
+        <div v-if="show_question" class="welcome">
+          <span>{{question_str}}</span>
         </div>
+      </transition>
+        <div v-if="show_choices" class="choices move-lvzu">
+          <a href="#/register">RST&LOG</a>
+          <span>|</span>
+          <span class="comment-button" @click='_chat'>Chat</span>
+          <span>|</span>
+          <span class="comment-button" @click='_conmment'>Comment</span>
+        </div>
+        <transition name="fade">
+        <div v-if="show_comments" class="">
+          <input type="text" @keydown.enter="_submitComment"  v-model="comment_str" class="comment-input"></input>
+        </div>
+      </transition>
+      <transition name="fade">
+      <div v-if="show_chat" class="">
+        <input type="text" @keydown.enter="_submitChat"  v-model="chat_str" class="comment-input"></input>
+      </div>
+    </transition>
+
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import moment from 'moment'
 export default {
   name: 'home',
   data () {
     return {
+      question_str:'what do you want to do ?',
+      user_name:'',
+      now_time:moment().format('h:mm:ss a'),
+      show_welcome:false,
+      show_name:false,
+      show_question:false,
+      show_comments:false,
+      show_chat:false,
+      show_choices:false,
+      show_time:false,
+      comment_str:'',
+      chat_str:'',
+      comment_interval_flag:true,
       picList: [],
       bg_url:'',
       overlay_url:'',
@@ -22,8 +76,11 @@ export default {
   },
 
   mounted: function() {
+    // localStorage.isVisited = false;
     const t = this
-
+    setInterval(function () {
+      t.now_time = moment().format('h:mm:ss a')
+    },1000)
     fetch('http://127.0.0.1:8000/api/get_pic_urls', {
         method: 'get',
       })
@@ -50,14 +107,137 @@ export default {
         };
       })
 
+      if(localStorage.isVisited == "true"){
+        t.show_welcome = false;
+        t.show_question = true;
+        t.show_choices = true;
+        t.show_time = true;
+        return ;
+      }
+
+      localStorage.isVisited = true;
+      t.show_welcome = true;
+      setTimeout(function () {
+        t.show_welcome = false;
+      },3000)
+      setTimeout(function () {
+        t.show_name = true;
+      },4600)
+
+  },
+
+  methods: {
+    _conmment:function() {
+      this.chat_str = ''
+      this.question_str = 'what do you want to do ?'
+      if(!this.show_chat){
+        this.show_comments = true;
+        return
+      }
+      const t = this;
+      this.show_chat = false;
+      setTimeout(function () {
+        t.show_comments = true;
+      },500)
+    },
+    _submitComment:function (e) {
+      const  t = this
+      if(e.target.value==''){
+        this.$message({
+         showClose: true,
+         message: '评论请勿为空'
+       });
+       return
+      }
+      if(this.comment_interval_flag == false){
+        this.$message({
+         showClose: true,
+         message: '请勿短时间提交多次评论！'
+       });
+       return;
+      }
+      this.show_comments = false;
+      this.comment_str = ''
+      this.comment_interval_flag = false;
+      setTimeout(function () {
+          t.comment_interval_flag = true;
+      },5000)
+      fetch(`http://127.0.0.1:8000/api/comment?user=${localStorage.username}&comment=${e.target.value}`, {
+          method: 'get',
+        })
+        .then(re => re.json())
+        .then(re => {
+          // console.log(re);
+          // console.log(e.target.value);
+          if(re.msg == 'success'){
+            this.$message({
+             showClose: true,
+             message: '评论已成功送到lvzu那边了😂！',
+           });
+          }
+        })
+    },
+    _submitName:function (e) {
+      const t = this
+      if(e.target.value==''){
+        this.$message({
+         showClose: true,
+         message: '姓名请勿为空'
+       });
+       return
+      }
+      localStorage.username = e.target.value
+      this.show_name = false;
+      setTimeout(function () {
+        t.show_choices = true;
+        t.show_time = true;
+        t.show_question = true;
+      },1000)
+
+    },
+
+    _chat:function () {
+      this.comment_str = ''
+      if(!this.show_comments){
+        this.show_chat = true;
+        return
+      }
+      const t = this;
+      this.show_comments = false;
+      setTimeout(function () {
+        t.show_chat = true;
+      },1000)
+
+    },
+    _submitChat:function () {
+      const t = this
+      // http://www.tuling123.com/openapi/api?key=add0513d906d4febabfd0ce2a42102ef
+      fetch(`http://www.tuling123.com/openapi/api?key=add0513d906d4febabfd0ce2a42102ef&info=${t.chat_str}&userid=${localStorage.username}`,{
+      })
+      .then(re => re.json())
+      .then(re => {
+        console.log(re.text.substr(0,20));
+        if(re.text.length>20){
+          let temp = re.text.substr(0,17)
+          temp += '...'
+          t.question_str = temp
+        }else {
+          t.question_str = re.text
+        }
+      })
+      this.chat_str = ''
+
+    },
   },
 
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="css" scoped>
-
+<style lang="scss" scoped>
+span{
+  margin-left: 15px;
+}
 .mine-home{
   position: absolute;
   width: 100%;
@@ -70,12 +250,52 @@ export default {
   width: 100%;
   background-size: 100%;
 }
-.welcome{
+
+.my-time{
+  margin-top: 12%;
+  font-size: 80px;
+  color:#ffffff;
+}
+
+.welcome1{
   margin-top: 20%;
   font-size: 80px;
   color:#ffffff;
 }
 
+.welcome{
+  margin-top: 4%;
+  font-size: 80px;
+  color:#ffffff;
+}
+
+.choices{
+  margin-top: 5%;
+  font-size: 55px;
+  color:#ffffff;
+}
+
+.comment-input{
+  margin-top: 30px;
+  height:60px;
+  line-height: 60px;
+  letter-spacing: 0;
+  white-space: nowrap;
+  font-weight: 500;
+  font-size: 3.4rem;
+  text-align: center;
+  border:none;
+  background: transparent;
+  color:#fff;
+  border-bottom: 3px solid #fff;
+    outline:none;
+    caret-color: #ffffff;
+}
+
+.comment-button:hover{
+  cursor: pointer;
+  background-color: #123456；
+}
 
 @-webkit-keyframes move-lvzu {
     0% {
@@ -92,4 +312,48 @@ export default {
     -webkit-animation: move-lvzu 1.5s cubic-bezier(.4, 0, .2, 1) 0s 1;
     animation: move-lvzu 1.5s cubic-bezier(.4, 0, .2, 1) 0s 1;
 }
+
+@-webkit-keyframes trans-lvzu {
+    0% {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.trans-lvzu {
+    -webkit-animation: trans-lvzu 1.5s cubic-bezier(.4, 0, .2, 1) 0s 1;
+    animation:trans-lvzu 1.5s cubic-bezier(.4, 0, .2, 1) 0s 1;
+}
+
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active in below version 2.1.8 */ {
+  opacity: 0
+}
+
+
+  a{
+    color:#ffffff;
+  }
+
+  a:link {
+    text-decoration: none;
+  }
+
+  a:visited {
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: none;
+  }
+
+  a:active {
+    text-decoration: none;
+  }
+
 </style>

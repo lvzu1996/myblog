@@ -1,10 +1,14 @@
 # Create your views here.
 from django.views.decorators.http import require_http_methods
 from django.http import JsonResponse
-from models import Pictures,Accounts
+from models import Pictures,Accounts,Comments
 from django.core import serializers
 from django.views.decorators.csrf import csrf_protect,csrf_exempt
 import json
+import urllib
+import sys
+reload(sys)
+sys.setdefaultencoding("utf-8")
 
 
 @require_http_methods(["GET"])
@@ -83,4 +87,19 @@ def account_login(request):
         response['msg'] = 'notRegisterd'
         response['error_num'] = 0
         return JsonResponse(response)
+    return JsonResponse(response)
+
+
+@require_http_methods(["GET"])
+def comment(request):
+    response = {}
+    try:
+        comment = Comments(user=request.GET.get('user'),comment=request.GET.get('comment'))
+        comment.save()
+        response['msg'] = 'success'
+        response['error_num'] = 0
+    except  Exception,e:
+        response['msg'] = str(e)
+        response['error_num'] = 1
+
     return JsonResponse(response)

@@ -22,3 +22,11 @@ class Accounts(models.Model):
 
     def __unicode__(self):
         return self.username
+
+class Comments(models.Model):
+    user = models.CharField(max_length=16)
+    comment = models.CharField(max_length=255)
+    comment_time = models.DateTimeField(auto_now_add=True)
+
+    def __unicode__(self):
+        return self.user
