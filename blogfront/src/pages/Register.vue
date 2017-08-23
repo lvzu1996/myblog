@@ -125,12 +125,13 @@ export default {
       user_msg_showing: false,
       //表示输入手机验证码的框显不显示
       verify_code_show: false,
+      hostname:'47.94.129.112',
     }
   },
 
   mounted: function() {
     const t = this
-    fetch('http://127.0.0.1:8000/api/get_pic_urls', {
+    fetch(`http://${t.hostname}/api/get_pic_urls`, {
         method: 'get',
       })
       .then(re => re.json())
@@ -183,7 +184,7 @@ export default {
         t.log_username = ''
         return
       }
-      fetch('http://127.0.0.1:8000/api/account_login', {
+      fetch(`http://${t.hostname}/api/account_login`, {
           method: 'post',
           body: 'username=' + t.log_username + '&password=' + t.log_password,
           headers: {
@@ -249,7 +250,7 @@ export default {
         this.$message.error('您的手机号输入有误，请重新输入');
         return
       }
-      fetch('http://127.0.0.1:8000/api/account_register', {
+      fetch(`http://${t.hostname}/api/account_register`, {
           method: 'post',
           body: 'username=' + t.register_username + '&password=' + t.register_password + '&nickname=' + t.register_nickname,
           headers: {

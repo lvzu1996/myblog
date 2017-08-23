@@ -25,7 +25,11 @@ SECRET_KEY = 'zwm4691-xeh%rn*&8z$=qwt@%66p(6h-7df5cb^97ju2&@hs-z'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+	'localhost',
+	'127.0.0.1',
+	'47.94.129.112',
+]
 
 
 # Application definition
@@ -58,7 +62,7 @@ ROOT_URLCONF = 'myproject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['blogfront/dist'],
+        'DIRS': [os.path.join(BASE_DIR,'blogfront/dist')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -70,6 +74,8 @@ TEMPLATES = [
         },
     },
 ]
+
+TEMPLATES_URL = os.path.join(BASE_DIR,'blogfront/dist')
 
 WSGI_APPLICATION = 'myproject.wsgi.application'
 
@@ -124,7 +130,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (os.path.join(BASE_DIR,'blogfront/dist/static'),)
 
 # Add for vuejs
 STATICFILES_DIRS = [

@@ -72,6 +72,7 @@ export default {
       picList: [],
       bg_url:'',
       overlay_url:'',
+      hostname:'47.94.129.112',
     }
   },
 
@@ -81,7 +82,7 @@ export default {
     setInterval(function () {
       t.now_time = moment().format('h:mm:ss a')
     },1000)
-    fetch('http://127.0.0.1:8000/api/get_pic_urls', {
+    fetch(`http://${t.hostname}/api/get_pic_urls`, {
         method: 'get',
       })
       .then(re => re.json())
@@ -107,7 +108,7 @@ export default {
         };
       })
 
-      if(localStorage.isVisited == "true"){
+      if(localStorage.isVisited == "true" && localStorage.username){
         t.show_welcome = false;
         t.show_question = true;
         t.show_choices = true;
@@ -162,7 +163,7 @@ export default {
       setTimeout(function () {
           t.comment_interval_flag = true;
       },5000)
-      fetch(`http://127.0.0.1:8000/api/comment?user=${localStorage.username}&comment=${e.target.value}`, {
+      fetch(`http://${t.hostname}/api/comment?user=${localStorage.username}&comment=${e.target.value}`, {
           method: 'get',
         })
         .then(re => re.json())
