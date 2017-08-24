@@ -53,6 +53,11 @@
   animation-direction: alternate;
   }
 
+  .zheyangdeni{
+    display: flex;
+  }
+
+
     @keyframes typing3 {
       0%{
         width: 0;
@@ -72,4 +77,26 @@
     white-space: nowrap;
     border-right: 0.2em solid;
     animation:typing3 2.5s steps(7) , caret 0.5s steps(26) 8;
+    }
+
+    @keyframes typing4 {
+      0%{
+        width: 0;
+      }
+      25% {
+        width: 0;
+      }
+      75%{
+        width: 25rem;
+      }
+    }
+  #text4 {
+    width: 25rem;
+    font-size:5rem;
+    display: inline-block;
+    font-weight: bold;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 0.2em solid;
+    animation:typing4 2.5s steps(5) , caret 0.5s steps(26) 8;
     }

@@ -1,17 +1,25 @@
 <template>
   <div id="Main">
-    <div id="head-peixun">培训行业首选学习平台</div>
-    <div  v-if="text1Flag" id="text1" v-model="h1Text">
+    <div id="head-peixun">单身青年首选交友平台</div>
+    <div  v-if="text1Flag" id="text1">
       {{ h1Text }}
     </div>
-    <div  v-if="text2Flag" id="text2" v-model="h1Text">
+    <div  v-if="text2Flag" id="text2">
       {{ h1Text }}
     </div>
-    <div  v-if="text3Flag" id="text3" v-model="h1Text">
-      {{ h1Text }}
-    </div>
-    <div class="">
-
+    <div class="zheyangdeni">
+      <div  v-if="text3Flag" id="text3">
+        {{ h1Text }}
+      </div>
+      <div v-if="text4Flag" id="text4">
+        {{ h2Text }}
+      </div>
+      <div v-if="text5Flag" id="text5">
+        {{ h2Text }}
+      </div>
+      <div v-if="text6Flag" id="text6">
+        {{ h2Text }}
+      </div>
     </div>
   </div>
 </template>
@@ -24,9 +32,11 @@ export default {
   data(){
     return {
       h1Text:"只为守护世界和平",
+      h2Text:"万年日漫宅",
       text1Flag:true,
       text2Flag:false,
       text3Flag:false,
+      text4Flag:false,
     }
   },
 
@@ -35,7 +45,7 @@ export default {
     setTimeout(function () {
       t.text1Flag = false;
       t.text2Flag = true;
-      t.h1Text = "只为招更多的学生"
+      t.h1Text = "只为找更多的妹纸"
     },5300)
     setTimeout(function () {
       t.text2Flag = false;
@@ -44,6 +54,7 @@ export default {
     },8800)
     setTimeout(function () {
       $("#text3").css("border-right","0")
+      t.text4Flag = true;
     },11000)
   }
 }
