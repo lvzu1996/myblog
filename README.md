@@ -1,7 +1,7 @@
 # this is my first full-stack program
 
 >@author:lvzu  
->@Updated date:2017/08/24
+>@Updated date:2017/08/24  
 >@say something : hope to become a full-stack programer!  
 
 ## Technology Stack
