@@ -3,6 +3,19 @@
     <div class="mine-home" :style="{backgroundImage: 'url(' + bg_url + ')'}">
       <div class="overlay" :style="{backgroundImage: 'url(' + overlay_url + ')'}">
 
+        <!-- <form action="http://www.baidu.com/baidu" target="_blank">
+          <table bgcolor="#FFFFFF">
+            <tr>
+              <td>
+                <input name=tn type=hidden value=baidu>
+                <a><img src="https://gss0.bdstatic.com/70cFsjip0QIZ8tyhnq/img/logo-80px.gif" ></a>
+                <input type=text name=word size=30>
+                <input type="submit" value="百度搜索">
+              </td>
+            </tr>
+          </table>
+          </form> -->
+
         <transition name="fade">
           <div v-if="show_welcome" class="welcome1 move-lvzu">
             Hello, welcome !
@@ -212,7 +225,6 @@ export default {
     },
     _submitChat:function () {
       const t = this
-      // http://www.tuling123.com/openapi/api?key=add0513d906d4febabfd0ce2a42102ef
       fetch(`http://www.tuling123.com/openapi/api?key=add0513d906d4febabfd0ce2a42102ef&info=${t.chat_str}&userid=${localStorage.username}`,{
       })
       .then(re => re.json())
@@ -357,4 +369,21 @@ span{
     text-decoration: none;
   }
 
+
+  // #type{
+  //   color: #ffffff;
+  //   width:300px;/*这里修改文字长度*/
+  //   white-space:nowrap;
+  //   overflow:hidden;
+  //   animation: dy 3s steps(100, end) infinite;
+  //   }
+  //
+  //   @keyframes dy{
+  //   from { width: 0;}
+  //   }
+  //   @keyframes blink {
+  //     50%{
+  //       border-color: transparent;
+  //     }
+  //   }
 </style>
