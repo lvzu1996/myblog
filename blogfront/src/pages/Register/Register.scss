@@ -1,0 +1,342 @@
+a {
+    padding: 10px;
+    text-decoration: none;
+}
+
+
+
+//主登录框
+.main-part {
+    width: 400px;
+    height: 550px;
+    overflow: hidden;
+    text-align: center;
+    margin: 10% auto 0;
+    vertical-align: middle;
+    background-color: #ffffff;
+    box-shadow: 0 0 15px 15px #d9d9d9;
+    font-family: monaco, -apple-system,SF UI Display,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif;
+}
+
+//登录框上方操作栏
+.ope {
+    margin-top: 40px;
+
+    //登录 注册中间 点的样式
+    .point {
+        padding-left: 10px;
+        padding-right: 10px;
+        color: #969696;
+    }
+
+    //登录 注册 非选中状态样式
+    .normal {
+        font-size: 18px;
+        font-weight: bold;
+        color: #969696;
+    }
+    //登录 注册 激活状态样式
+    .active {
+        font-size: 18px;
+        font-weight: bold;
+        color: #58B7FF;
+        border-bottom: 2px solid #58B7FF;
+    }
+
+}
+
+//登录状态 输入框集合
+.login-input {
+    margin: 60px auto 0;
+    width: 300px;
+    height: 100px;
+
+    //包含icon的单一框样式
+    .us-pw-input-pre {
+        float: left;
+        font-size: 18px;
+        width: 300px;
+        height: 50px;
+        border: 1px solid #c8c8c8;
+        border-radius: 8px;
+        background-color: #f2f2f2;
+
+        //输入框前的icon样式
+        .bef-icon {
+            display: block;
+            float: left;
+            width: 25px;
+            height: 25px;
+            margin-top: 10px;
+            margin-left: 10px;
+            padding-right: 10px;
+            vertical-align: middle;
+        }
+
+        //输入框样式
+        .us-pd-input {
+            width: 240px;
+            height: 48px;
+            font-size: 16px;
+            letter-spacing: 0.5px;
+            line-height: 48px;
+            vertical-align: middle;
+            border: none;
+            outline: none;
+            background-color: #f2f2f2;
+        }
+    }
+}
+
+//登录框下方 问题样式
+.clarify {
+    text-align: left;
+    margin-top: 35px;
+    margin-left: 55px;
+    width: 300px;
+    height: 19px;
+
+    //记住我选择框样式
+    .remember {
+        font-size: 14px;
+        color: #969696;
+    }
+    //登录遇到问题样式
+    .login-problem {
+        margin-left: 115px;
+        font-size: 14px;
+        color: #969696;
+    }
+    .login-problem:hover {
+        cursor: pointer;
+    }
+}
+
+//登录按键外层div
+.button {
+    margin-top: 30px;
+    //登录按键样式
+    .login-button {
+        font-size: bold;
+        width: 270px;
+        height: 50px;
+        border-radius: 30px;
+    }
+}
+
+//下方社交账号登录和icon
+.others {
+    position: relative;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 0;
+    width: 300px;
+    margin-left: 50px;
+    //社交账号字体样式和前后横线
+    .social-text {
+        font-size: 15px;
+        color: #969696;
+        margin-bottom: 0;
+    }
+    .social-text:before {
+        content: "";
+        margin-left: 30px;
+        border-top: 1px solid #b5b5b5;
+        display: block;
+        position: relative;
+        width: 45px;
+        top: 8px;
+        font-family: inherit;
+        font-weight: 500;
+        line-height: 1.1;
+
+    }
+    .social-text:after {
+        content: "";
+        border-top: 1px solid #b5b5b5;
+        display: block;
+        position: absolute;
+        margin-left: 225px;
+        width: 45px;
+        top: 8px;
+        font-family: inherit;
+        font-weight: 500;
+        line-height: 1.1;
+
+    }
+}
+//社交账号登录icon样式
+.other-icons {
+    width: 280px;
+    height: 70px;
+    margin: 25px auto 0;
+    .icons {
+        width: 35px;
+        height: 35px;
+        margin-right: 17px;
+    }
+    .icons:hover {
+        cursor: pointer;
+    }
+}
+
+//注册界面样式
+.el-class {
+    //注册输入三个框
+    .register-input {
+        margin: 50px auto 0;
+        width: 300px;
+        height: 151px;
+        //单一包括了icon的输入框
+        .us-pw-input-pre {
+            float: left;
+            font-size: 18px;
+            width: 300px;
+            height: 50px;
+            border: 1px solid #c8c8c8;
+            border-radius: 8px;
+            background-color: #f2f2f2;
+            //输入框前的icon样式
+            .bef-icon {
+                display: block;
+                float: left;
+                width: 25px;
+                height: 25px;
+                margin-top: 10px;
+                margin-left: 10px;
+                padding-right: 20px;
+                vertical-align: middle;
+            }
+            //输入框样式
+            .us-pd-input {
+                width: 230px;
+                height: 48px;
+                font-size: 16px;
+                letter-spacing: 0.5px;
+                line-height: 48px;
+                vertical-align: middle;
+                border: none;
+                outline: none;
+                background-color: #f2f2f2;
+            }
+        }
+    }
+    .get-verifycode {
+        width: 100px;
+        margin-top: 5px;
+        height: 40px;
+    }
+    //注册按键样式
+    .button {
+        margin-top: 30px;
+        .login-button {
+            font-size: bold;
+            width: 270px;
+            height: 50px;
+            border-radius: 30px;
+        }
+    }
+    //注册下方提示信息样式
+    .sign-up-msg {
+        font-size: 12px;
+        line-height: 18px;
+        color: #969696;
+        a {
+            padding: 3px;
+        }
+    }
+
+    //注册界面下方社交账号icon样式
+    .others {
+        position: relative;
+        text-align: center;
+        margin-top: 10px;
+        margin-bottom: 0;
+        width: 300px;
+        margin-left: 50px;
+        //社交账号注册 字体样式和前后横线
+        .social-text {
+            font-size: 15px;
+            color: #969696;
+            margin-bottom: 0;
+        }
+        .social-text:before {
+            content: "";
+            margin-left: 30px;
+            border-top: 1px solid #b5b5b5;
+            display: block;
+            position: relative;
+            width: 45px;
+            top: 8px;
+            font-family: inherit;
+            font-weight: 500;
+            line-height: 1.1;
+
+        }
+        .social-text:after {
+            content: "";
+            border-top: 1px solid #b5b5b5;
+            display: block;
+            position: absolute;
+            margin-left: 225px;
+            width: 45px;
+            top: 8px;
+            font-family: inherit;
+            font-weight: 500;
+            line-height: 1.1;
+
+        }
+    }
+}
+
+//导入的iconfont样式
+.icon {
+    width: 25px;
+    height: 25px;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+}
+//切换界面时的animation
+@-webkit-keyframes move-lvzu {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+    }
+}
+//animation的使用类  绑定后会有切换的效果
+.move-lvzu {
+    -webkit-animation: move-lvzu 1.5s cubic-bezier(.4, 0, .2, 1) 0s 1;
+    animation: move-lvzu 1.5s cubic-bezier(.4, 0, .2, 1) 0s 1;
+}
+//切换界面时的animation
+@-webkit-keyframes move-lvzu {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+    }
+}
+//验证码出现的动画
+@-webkit-keyframes move-lvzu-2 {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateX(-15px);
+    }
+    to {
+        opacity: 1;
+    }
+}
+//animation的使用类  绑定后会有切换的效果 验证码
+.move-lvzu-2 {
+    -webkit-animation: move-lvzu-2 0.5s cubic-bezier(.4, 0, .2, 1) 0s 1;
+    animation: move-lvzu-2 0.5s cubic-bezier(.4, 0, .2, 1) 0s 1;
+}
+a:hover {
+    cursor: pointer;
+}

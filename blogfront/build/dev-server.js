@@ -1,15 +1,26 @@
+// 检查NodeJS和npm的版本
 require('./check-versions')()
 
+// 获取配置
 var config = require('../config')
+// 如果Node的环境变量中没有设置当前的环境（NODE_ENV），则使用config中的配置作为当前的环境
 if (!process.env.NODE_ENV) {
   process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV)
 }
 
+// 一个可以调用默认软件打开网址、图片、文件等内容的插件
+// 这里用它来调用默认浏览器打开dev-server监听的端口，例如：localhost:8080
 var opn = require('opn')
 var path = require('path')
 var express = require('express')
 var webpack = require('webpack')
+
+// 一个express中间件，用于将http请求代理到其他服务器
+// 例：localhost:8080/api/xxx  -->  localhost:3000/api/xxx
+// 这里使用该插件可以将前端开发中涉及到的请求代理到API服务器上，方便与服务器对接
 var proxyMiddleware = require('http-proxy-middleware')
+
+// 根据 Node 环境来引入相应的 webpack 配置
 var webpackConfig = require('./webpack.dev.conf')
 
 // default port where dev server listens for incoming traffic

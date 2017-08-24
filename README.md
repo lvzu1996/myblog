@@ -48,6 +48,7 @@ npm install
 
 # build for production with minification
 npm run build
+python manage.py collectstatic
 
 # mysql configure
 myproject/settings.py  
