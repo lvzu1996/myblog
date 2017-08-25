@@ -5,6 +5,8 @@ import Home from '@/pages/Home/Home'
 import Main from '@/pages/Main/Main'
 import Register from '@/pages/Register/Register'
 
+import Test from '@/pages/Test/Test'
+
 Vue.use(Router)
 
 export default new Router({
@@ -28,6 +30,11 @@ export default new Router({
       path:'/main',
       name:'Main',
       component:Main
+    },
+    {
+      path:'/test',
+      name:'Test',
+      component:Test
     },
   ]
 })

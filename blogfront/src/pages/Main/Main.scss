@@ -1,7 +1,59 @@
-#head-peixun{
-  font-size: 5.3rem;
-  font-weight: bold;
-  width: 53rem;
+#header{
+  padding: 0 20%;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#header-tabs{
+  display: flex;
+  align-items: center;
+}
+.tab-single{
+  text-decoration: none;
+  color: #dbdbdb;
+  padding: 0 2rem;
+  font-size: 1.2rem;
+  font-weight: lighter;
+}
+
+.tab-single:hover{
+  color: #ffffff;
+}
+
+#Main{
+  text-align: center;
+  margin: 0 auto;
+}
+
+#banner{
+  margin: 0;
+  z-index: -1;
+  position: absolute;
+  top: -150px;
+  bottom: -15px;
+  width: 100%;
+  height:50rem;
+  margin-top: -140px;
+  transform: skewY(-5deg);
+  transform-origin: center;
+  background-image: linear-gradient(180deg,#0d1a44 13%,#3c4f91 56%,#5fc1e4);
+}
+
+#banner-pic{
+  position: absolute;
+  width: 35.5rem;
+  height: 31.69rem;
+  top:5.75rem;
+  left: 50%;
+  display: block;
+  background-size: cover;
+}
+
+#banner-stars{
+  position: absolute;
+  margin-left: 25%;
 }
 
 @keyframes caret {
@@ -9,94 +61,33 @@
     border-color: transparent;
   }
 }
-
-@keyframes typing1 {
-  0%{
-    width: 0;
-  }
-  25% {
-    width: 0;
-  }
-  75%{
-    width: 40rem;
-  }
+.container{
+  padding: 0 20%;
+  margin-top: 10rem;
+  text-align:left;
 }
 
-
-
-//16px = 1 rem
-#text1 {
-  width: 40rem;
-  font-size:5rem;
+.title{
+  color: #ffffff;
+  width: 24rem;
+  font-size:3rem ;
   font-weight: bold;
   overflow: hidden;
   white-space: nowrap;
-  border-right: 0.2em solid;
-  animation:typing1 3s steps(8) infinite, caret 0.5s steps(26) infinite;
-  animation-direction: alternate;
-  }
+  margin: 0;
+}
 
-  @keyframes typing2 {
-    from{
-      width: 0;
-    }
-  }
-
-#text2 {
-  width: 45rem;
-  font-size:5rem;
-  font-weight: bold;
+#typing1{
+  width: auto;
+  color: #ffffff;
+  font-size:3rem;
   overflow: hidden;
+  display: inline-block;
+  text-align: left;
   white-space: nowrap;
+}
+
+.caret {
   border-right: 0.2em solid;
-  animation:typing2 2s steps(9) infinite, caret 0.5s steps(26) infinite;
-  animation-direction: alternate;
+  animation:caret 0.65s steps(100) infinite;
   }
-
-  .zheyangdeni{
-    display: flex;
-  }
-
-
-    @keyframes typing3 {
-      0%{
-        width: 0;
-      }
-      25% {
-        width: 0;
-      }
-      75%{
-        width: 35rem;
-      }
-    }
-  #text3 {
-    width: 35rem;
-    font-size:5rem;
-    font-weight: bold;
-    overflow: hidden;
-    white-space: nowrap;
-    border-right: 0.2em solid;
-    animation:typing3 2.5s steps(7) , caret 0.5s steps(26) 8;
-    }
-
-    @keyframes typing4 {
-      0%{
-        width: 0;
-      }
-      25% {
-        width: 0;
-      }
-      75%{
-        width: 25rem;
-      }
-    }
-  #text4 {
-    width: 25rem;
-    font-size:5rem;
-    display: inline-block;
-    font-weight: bold;
-    overflow: hidden;
-    white-space: nowrap;
-    border-right: 0.2em solid;
-    animation:typing4 2.5s steps(5) , caret 0.5s steps(26) 8;
-    }
