@@ -2,7 +2,7 @@
 
 echo "lvzu的自动部署开始"
 
-cd  ~/documents/workspace/lvzu@xiaobao/full-stack/myblog/blogfront/
+cd  blogfront
 
 cnpm install
 npm run build
