@@ -4,11 +4,15 @@ echo "lvzu的自动部署开始"
 
 cd  ~/documents/workspace/lvzu@xiaobao/full-stack/myblog/blogfront/
 
+cnpm install
 npm run build
 
 cd ..
 
+python manage.py makemigrations myapp
+python manage.py migrate
 python manage.py collectstatic
+
 
 if [[ $?=0 ]]; then echo -e "\nsuccess!"
   else echo "failed!"
