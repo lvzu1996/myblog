@@ -70,32 +70,18 @@
       </li>
     </div>
 
-    <div class="footer">
-      <span>Element 1.4.3 Boron</span>
-      <div class="suggest">
-        <a href="/#/main">反馈建议</a>
-        <a href="/#/main">贡献指南</a>
-        <a href="/#/main">Lvment-React</a>
-      </div>
-
-      <div id="wechat-div">
-        <svg class="icon" id="wechat" aria-hidden="true">
-          <use xlink:href="#icon-weixin"></use>
-        </svg>
-      </div>
-      <div id="github-div">
-        <svg class="icon" id="github" aria-hidden="true">
-          <use xlink:href="#icon-github"></use>
-        </svg>
-      </div>
-
-    </div>
+    <myfooter></myfooter>
 
   </div>
 </template>
 <script>
+import Myfooter from '../../module/Myfooter/Myfooter.vue'
+
 export default {
   name: "Main",
+  components: {
+    myfooter:Myfooter
+  },
   data(){
     return{
       typingStr1:"只为守护世界和平",

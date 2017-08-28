@@ -1,0 +1,66 @@
+
+.footer {
+  margin-top: 120px;
+  height: 120px;
+  width: 100%;
+  background-color: #324057;
+  position: relative;
+  color: #a4aebd;
+
+  span {
+    position: absolute;
+    top: 40px;
+    left: 150px;
+    line-height: 1;
+    font-size: 22px;
+    margin: 0;
+  }
+
+  .suggest {
+    position: absolute;
+    top: 75px;
+    left: 150px;
+    display: inline-block;
+    line-height: 1;
+    font-size: 12px;
+
+    a {
+      color: #768193;
+      padding-right: 5px;
+    }
+  }
+
+  #wechat-div {
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    right: 220px;
+    top: 50px;
+  }
+
+  #github-div {
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    right: 150px;
+    top: 50px;
+  }
+
+  .icon {
+    width: 32px;
+    height: 32px;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+    transform-origin: 50% 50%;
+    transition: ease 0.2s;
+    opacity: 0.5;
+    // animation:big 0.65s steps(100) 1;
+  }
+
+  .icon:hover {
+    transform: scale(1.2);
+    opacity: 1;
+    cursor: pointer;
+  }
+}
