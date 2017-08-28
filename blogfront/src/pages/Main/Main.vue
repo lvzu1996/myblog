@@ -1,35 +1,41 @@
 <template>
   <div id="Main">
-    <div id="header">
+    <div id="header-fa">
+      <div id="header">
 
-      <a href="#">
-        <img src="http://i2.bvimg.com/599620/b8e24aa5fc1960c5.png" >
-      </a>
+        <a href="#">
+          <img src="http://i2.bvimg.com/599620/b8e24aa5fc1960c5.png" >
+        </a>
 
-      <div id="header-tabs">
-        <a href="/#/main" class='tab-single'>
-          指南
-        </a>
-        <a href="/#/main" class='tab-single'>
-          组件
-        </a>
-        <a href="/#/main" class='tab-single'>
-          资源
-        </a>
-        <a href="/#/main" class='tab-single'>
-          中文/英文
-        </a>
+        <div id="header-tabs">
+          <a href="/#/main" class='tab-single'>
+            指南
+          </a>
+          <a href="/#/main" class='tab-single'>
+            组件
+          </a>
+          <a href="/#/main" class='tab-single'>
+            资源
+          </a>
+          <div class='tab-single'>
+            <span id="lang-cn" @click="changeCn()">中文</span>
+            <span>/</span>
+            <span id="lang-en" @click="changeEn()">En</span>
+          </div>
+        </div>
       </div>
     </div>
+
 
     <div id="banner"></div>
     <div id="banner-stars">
       <img src="http://i2.bvimg.com/599620/7445d8aa2b2ae5e9.png" alt="">
     </div>
-    
+
     <div >
       <img id="banner-pic" src="http://element.eleme.io/static/banner-bg.75437e1.svg" alt="">
     </div>
+
     <div class="container">
       <h2 class="title">
         网站快速成型工具
@@ -37,9 +43,52 @@
       <div class="caret" id="typing1">
         {{ str1 }}
       </div>
-      <div class="">
+    </div>
 
+    <div id="intro_str">
+      Lvment，一套为开发者、设计师和产品经理准备的基于 Vue 2.0 的组件库，提供了配套设计资源，帮助你的网站快速成型
+    </div>
+
+    <div class="intro_info">
+      <li class="intro_info_single">
+        <img src="http://i1.bvimg.com/599620/ddc20988a2dfec81.png" >
+        <h3>指南</h3>
+        <p>了解设计指南，帮助产品设计人员搭建逻辑清晰、结构合理且高效易用的产品。</p>
+        <a href="/#/main">查看详情</a>
+      </li>
+      <li class="intro_info_single">
+        <img src="http://i1.bvimg.com/599620/7a493631f6d30c30.png" >
+        <h3>组件</h3>
+        <p>使用组件 Demo 快速体验交互细节；使用前端框架封装的代码帮助工程师快速开发。</p>
+        <a href="/#/main">查看详情</a>
+      </li>
+      <li class="intro_info_single">
+        <img src="http://i1.bvimg.com/599620/f3f0e9cee32d6a24.png" >
+        <h3>资源</h3>
+        <p>下载相关资源，用其快速搭建页面原型或高保真视觉稿，提升产品设计效率。</p>
+        <a href="/#/main">查看详情</a>
+      </li>
+    </div>
+
+    <div class="footer">
+      <span>Element 1.4.3 Boron</span>
+      <div class="suggest">
+        <a href="/#/main">反馈建议</a>
+        <a href="/#/main">贡献指南</a>
+        <a href="/#/main">Lvment-React</a>
       </div>
+
+      <div id="wechat-div">
+        <svg class="icon" id="wechat" aria-hidden="true">
+          <use xlink:href="#icon-weixin"></use>
+        </svg>
+      </div>
+      <div id="github-div">
+        <svg class="icon" id="github" aria-hidden="true">
+          <use xlink:href="#icon-github"></use>
+        </svg>
+      </div>
+
     </div>
 
   </div>
@@ -52,17 +101,14 @@ export default {
       typingStr1:"只为守护世界和平",
       typingStr2:"只为让你少加班",
       typingStr3:'只为这样的你：',
-      // chanpinshejishi:'产品设计师',
-      // jiaohushejishi:'交互设计师',
-      // shijueshejishi:'视觉设计师',
-      // chanpinjingli:'产品经理',
-      // qianduangongchengsh:'前端工程师',
       peopleType:['产品设计师','交互设计师','视觉设计师','产品经理','前端工程师'],
       str1:'',
     }
   },
 
   beforeMount() {
+
+    //设置 fontsize
 		(function (doc, win) {
 					var docEl = doc.documentElement,
 					resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
@@ -75,9 +121,17 @@ export default {
 			win.addEventListener(resizeEvt, recalc, false);
 			doc.addEventListener('DOMContentLoaded', recalc, false);
 			})(document, window);
+
+    //监听滚轮 设置header-fa的background-color
+      window.onscroll = function () {
+        let opacity = document.body.scrollTop/212
+        $('#header-fa').css('background-color',`rgba(32, 160, 255,${opacity})`)
+      }
 	},
 
   mounted() {
+
+
     const t = this
     let temp = 1
     t.str1 = ' '
@@ -189,7 +243,24 @@ export default {
       }, 120)
     }, 13000)
 
-  }
+  },
+
+  methods: {
+    changeEn() {
+      $('#lang-en').css({'font-weight':'bold','color':'#fff'})
+      $('#lang-cn').css({'font-weight':'normal','color':'#e7e3e3'})
+    },
+
+    changeCn() {
+      $('#lang-cn').css({'font-weight':'bold','color':'#fff'})
+      $('#lang-en').css({'font-weight':'normal','color':'#e7e3e3'})
+    },
+
+
+
+  },
+
+
 }
 </script>
 <style lang="scss" scoped>
