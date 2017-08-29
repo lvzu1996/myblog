@@ -111,11 +111,18 @@ def test_model(request):
     response = {}
     try:
         testmodel = TestModel.objects.filter()
-
         tempList  = json.loads(serializers.serialize("json", testmodel))
-        total = len(tempList)
+        tempList2 = []
+        temp = []
+        for i in tempList:
+            tempList2.append({
+                'times':i['fields']['times'],
+                'user_num':i['fields']['user_num'],
+                'title':i['fields']['title']
+            })
+        total = len(tempList2)
         data = {
-            'list':tempList,
+            'list':tempList2,
             'total':total
         }
         response['data'] = data
