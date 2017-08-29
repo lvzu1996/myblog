@@ -47,6 +47,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+	'django.middleware.locale.LocaleMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -140,3 +141,7 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR,'blogfront/dist/static'),)
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "blogfront/dist/static"),
 ]
+
+LANGUAGE_CODE = 'zh-Hans'
+USE_I18N = True
+USE_L10N = True
