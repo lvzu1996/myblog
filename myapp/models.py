@@ -30,3 +30,11 @@ class Comments(models.Model):
 
     def __unicode__(self):
         return self.user
+
+class TestModel(models.Model):
+    title = models.CharField(max_length=64)
+    user_num = models.CharField(max_length=64)
+    times = models.CharField(max_length=64)
+
+    def __unicode__(self):
+        return self.title

@@ -4,7 +4,7 @@
       <div id="header">
 
         <a href="#">
-          <img src="http://i2.bvimg.com/599620/b8e24aa5fc1960c5.png" >
+          <img src="http://ovfey247f.bkt.clouddn.com/main/tubiao.png" >
         </a>
 
         <div id="header-tabs">
@@ -29,11 +29,11 @@
 
     <div id="banner"></div>
     <div id="banner-stars">
-      <img src="http://i2.bvimg.com/599620/7445d8aa2b2ae5e9.png" alt="">
+      <img src="http://ovfey247f.bkt.clouddn.com/main/banner_star.png" alt="">
     </div>
 
     <div >
-      <img id="banner-pic" src="http://element.eleme.io/static/banner-bg.75437e1.svg" alt="">
+      <img id="banner-pic" src="http://ovfey247f.bkt.clouddn.com/main/banner_pic" alt="">
     </div>
 
     <div class="container">
@@ -51,19 +51,19 @@
 
     <div class="intro_info">
       <li class="intro_info_single">
-        <img src="http://i1.bvimg.com/599620/ddc20988a2dfec81.png" >
+        <img src="http://ovfey247f.bkt.clouddn.com/main/zhinan.png" >
         <h3>指南</h3>
         <p>了解设计指南，帮助产品设计人员搭建逻辑清晰、结构合理且高效易用的产品。</p>
         <a href="/#/main">查看详情</a>
       </li>
       <li class="intro_info_single">
-        <img src="http://i1.bvimg.com/599620/7a493631f6d30c30.png" >
+        <img src="http://ovfey247f.bkt.clouddn.com/main/zujian.png" >
         <h3>组件</h3>
         <p>使用组件 Demo 快速体验交互细节；使用前端框架封装的代码帮助工程师快速开发。</p>
         <a href="/#/main">查看详情</a>
       </li>
       <li class="intro_info_single">
-        <img src="http://i1.bvimg.com/599620/f3f0e9cee32d6a24.png" >
+        <img src="http://ovfey247f.bkt.clouddn.com/main/ziyuan.png" >
         <h3>资源</h3>
         <p>下载相关资源，用其快速搭建页面原型或高保真视觉稿，提升产品设计效率。</p>
         <a href="/#/main">查看详情</a>

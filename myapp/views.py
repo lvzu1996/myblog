@@ -1,7 +1,7 @@
 # Create your views here.
 from django.views.decorators.http import require_http_methods
 from django.http import JsonResponse
-from models import Pictures,Accounts,Comments
+from models import Pictures,Accounts,Comments,TestModel
 from django.core import serializers
 from django.views.decorators.csrf import csrf_protect,csrf_exempt
 import json
@@ -97,6 +97,30 @@ def comment(request):
         comment = Comments(user=request.GET.get('user'),comment=request.GET.get('comment'))
         comment.save()
         response['msg'] = 'success'
+        response['error_num'] = 0
+    except  Exception,e:
+        response['msg'] = str(e)
+        response['error_num'] = 1
+
+    return JsonResponse(response)
+
+
+# Test api
+@require_http_methods(["GET"])
+def test_model(request):
+    response = {}
+    try:
+        testmodel = TestModel.objects.filter()
+
+        tempList  = json.loads(serializers.serialize("json", testmodel))
+        total = len(tempList)
+        data = {
+            'list':tempList,
+            'total':total
+        }
+        response['data'] = data
+        response['msg'] = 'success'
+        response['success'] = True
         response['error_num'] = 0
     except  Exception,e:
         response['msg'] = str(e)

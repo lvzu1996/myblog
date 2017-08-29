@@ -9,3 +9,6 @@ from myapp import models
 admin.site.register(models.Pictures)
 admin.site.register(models.Accounts)
 admin.site.register(models.Comments)
+
+
+admin.site.register(models.TestModel)

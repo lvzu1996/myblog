@@ -1,6 +1,6 @@
 <template>
     <div class="footer">
-      <span>Element 1.4.3 Boron</span>
+      <span>Lvment 1.4.3 Boron</span>
       <div class="suggest">
         <a href="/#/main">反馈建议</a>
         <a href="/#/main">贡献指南</a>
