@@ -12,3 +12,4 @@ admin.site.register(models.Comments)
 
 
 admin.site.register(models.TestModel)
+admin.site.register(models.TestModel2)

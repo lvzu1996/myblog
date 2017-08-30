@@ -171,16 +171,14 @@ def test_model_fjy(request):
         # 处理返回的数据
         for i in tempList:
             tempList2.append({
-                '_id':i['fields']['id'],
-                'data_time':i['fields']['data_time'],
                 'date':i['fields']['date'],
-                'leijiyaoqing_yh':i['fields']['date'],
+                'leijiyaoqing_yh':i['fields']['leijiyaoqing_yh'],
                 'xinzengyaoqing_yh':i['fields']['xinzengyaoqing_yh'],
                 'leijiduihuan_kc':i['fields']['leijiduihuan_kc'],
-                'xinzengduihuan_kc':i['fields']['xinzengduihuan_kc'],
+                'xinzengduihuan_kc':i['fields']['xinzengduihuan'],
                 'leiji_kcyh':i['fields']['leiji_kcyh'],
                 'xinzeng_kcyh':i['fields']['xinzeng_kcyh'],
-                '__v':i['fields']['__v'],
+                '__v':i['fields']['v'],
             })
         total = len(tempList2)
 
