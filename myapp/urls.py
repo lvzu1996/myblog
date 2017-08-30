@@ -8,4 +8,6 @@ url(r'account_register$', views.account_register, ),
 url(r'account_login$', views.account_login, ),
 url(r'comment$', views.comment, ),
 url(r'test_model$', views.test_model, ),
+url(r'test_model_fjy$', views.test_model_fjy, ),
+
 ]

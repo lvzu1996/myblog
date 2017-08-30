@@ -38,3 +38,17 @@ class TestModel(models.Model):
 
     def __unicode__(self):
         return self.title
+
+
+class TestModel2(models.Model):
+    date = models.DateField()
+    leijiyaoqing_yh = models.CharField(max_length=64)
+    xinzengyaoqing_yh = models.CharField(max_length=64)
+    leijiduihuan_kc = models.CharField(max_length=64)
+    xinzengduihuan = models.CharField(max_length=64)
+    leiji_kcyh = models.CharField(max_length=64)
+    xinzeng_kcyh = models.CharField(max_length=64)
+    v = models.CharField(max_length=64)
+
+    def __unicode__(self):
+        return self.id

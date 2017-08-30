@@ -1,7 +1,9 @@
 # Create your views here.
+#coding=utf-8
 from django.views.decorators.http import require_http_methods
 from django.http import JsonResponse
-from models import Pictures,Accounts,Comments,TestModel
+import functions
+from models import Pictures,Accounts,Comments,TestModel,TestModel2
 from django.core import serializers
 from django.views.decorators.csrf import csrf_protect,csrf_exempt
 import json
@@ -110,10 +112,21 @@ def comment(request):
 def test_model(request):
     response = {}
     try:
-        testmodel = TestModel.objects.filter()
+        page_size = getPageSize(request.GET.get('page_size'))
+        page_num = getPageNum(request.GET.get('page_num'))
+        search_key= request.GET.get('search_key')
+        print page_size
+        print page_num
+
+        if search_key:
+            testmodel = TestModel.objects.filter(title__contains=search_key)
+        else:
+            testmodel = TestModel.objects.filter()
+
         tempList  = json.loads(serializers.serialize("json", testmodel))
         tempList2 = []
-        temp = []
+
+        # 处理返回的数据
         for i in tempList:
             tempList2.append({
                 'times':i['fields']['times'],
@@ -121,6 +134,56 @@ def test_model(request):
                 'title':i['fields']['title']
             })
         total = len(tempList2)
+
+        data = {
+            'list':tempList2,
+            'total':total
+        }
+        response['data'] = data
+        response['msg'] = 'success'
+        response['success'] = True
+        response['error_num'] = 0
+    except  Exception,e:
+        response['msg'] = str(e)
+        response['error_num'] = 1
+
+    return JsonResponse(response)
+
+@require_http_methods(["GET"])
+def test_model_fjy(request):
+    response = {}
+    try:
+        testmodel = TestModel2.objects.filter()
+        tempList  = json.loads(serializers.serialize("json", testmodel))
+        tempList2 = []
+
+        # "_id": "59a35d41fc5762486dd28df0",
+        #     "data_time": 1503763200000,
+        #     "date": "2017-08-27",
+        #     "leijiyaoqing_yh": 35,
+        #     "xinzengyaoqing_yh": 46,
+        #     "leijiduihuan_kc": 44,
+        #     "xinzengduihuan_kc": 43,
+        #     "leiji_kcyh": 42,
+        #     "xinzeng_kcyh": 41,
+        #     "__v": 0
+
+        # 处理返回的数据
+        for i in tempList:
+            tempList2.append({
+                '_id':i['fields']['id'],
+                'data_time':i['fields']['data_time'],
+                'date':i['fields']['date'],
+                'leijiyaoqing_yh':i['fields']['date'],
+                'xinzengyaoqing_yh':i['fields']['xinzengyaoqing_yh'],
+                'leijiduihuan_kc':i['fields']['leijiduihuan_kc'],
+                'xinzengduihuan_kc':i['fields']['xinzengduihuan_kc'],
+                'leiji_kcyh':i['fields']['leiji_kcyh'],
+                'xinzeng_kcyh':i['fields']['xinzeng_kcyh'],
+                '__v':i['fields']['__v'],
+            })
+        total = len(tempList2)
+
         data = {
             'list':tempList2,
             'total':total
