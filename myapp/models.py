@@ -51,4 +51,4 @@ class TestModel2(models.Model):
     v = models.CharField(max_length=64)
 
     def __unicode__(self):
-        return self.id
+        return '测试数据'

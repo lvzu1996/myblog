@@ -2,10 +2,10 @@
 #coding=utf-8
 from django.views.decorators.http import require_http_methods
 from django.http import JsonResponse
-import functions
 from models import Pictures,Accounts,Comments,TestModel,TestModel2
 from django.core import serializers
 from django.views.decorators.csrf import csrf_protect,csrf_exempt
+from functions import *
 import json
 import urllib
 import sys
@@ -157,16 +157,7 @@ def test_model_fjy(request):
         tempList  = json.loads(serializers.serialize("json", testmodel))
         tempList2 = []
 
-        # "_id": "59a35d41fc5762486dd28df0",
-        #     "data_time": 1503763200000,
-        #     "date": "2017-08-27",
-        #     "leijiyaoqing_yh": 35,
-        #     "xinzengyaoqing_yh": 46,
-        #     "leijiduihuan_kc": 44,
-        #     "xinzengduihuan_kc": 43,
-        #     "leiji_kcyh": 42,
-        #     "xinzeng_kcyh": 41,
-        #     "__v": 0
+
 
         # 处理返回的数据
         for i in tempList:
