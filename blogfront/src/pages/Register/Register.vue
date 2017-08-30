@@ -269,6 +269,9 @@ export default {
               message: '恭喜您，注册成功！',
               type: 'success'
             });
+            setTimeout(function () {
+              t.isLog = true
+            },1000)
           } else if (re.msg == 'registerd username') {
             this.$message({
               message: '该用户名已被注册',

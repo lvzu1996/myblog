@@ -153,10 +153,9 @@ def test_model(request):
 def test_model_fjy(request):
     response = {}
     try:
-        testmodel = TestModel2.objects.filter()
+        testmodel = TestModel2.objects.filter().order_by('date') 
         tempList  = json.loads(serializers.serialize("json", testmodel))
         tempList2 = []
-
 
 
         # 处理返回的数据
