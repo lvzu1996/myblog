@@ -6,6 +6,7 @@ from models import Pictures,Accounts,Comments,TestModel,TestModel2
 from django.core import serializers
 from django.views.decorators.csrf import csrf_protect,csrf_exempt
 from functions import *
+import hashlib
 import json
 import urllib
 import sys
@@ -70,22 +71,15 @@ def account_login(request):
     try:
         hasAccount = Accounts.objects.get(username=request.POST['username'])
         if(hasAccount):
-            if(hasAccount.password==request.POST['password']):
+            if(hasAccount.password==hashlib.sha1(request.POST['password']+request.POST['username']).hexdigest()):
                 response['msg'] = 'success'
                 response['error_num'] = 0
-                # response['test'] = hasAccount.password
                 return JsonResponse(response)
             response['msg'] = 'passwordError'
             response['error_num'] = 0
             return JsonResponse(response)
-        # response['msg'] = 'notRegisterd'
-        # response['error_num'] = 0
-        # return JsonResponse(response)
 
     except  Exception,e:
-        # response['msg'] = str(e)
-        # response['error_num'] = 1
-        # # response['test'] = request.POST.get('username')
         response['msg'] = 'notRegisterd'
         response['error_num'] = 0
         return JsonResponse(response)
@@ -153,7 +147,7 @@ def test_model(request):
 def test_model_fjy(request):
     response = {}
     try:
-        testmodel = TestModel2.objects.filter().order_by('date') 
+        testmodel = TestModel2.objects.filter().order_by('date')
         tempList  = json.loads(serializers.serialize("json", testmodel))
         tempList2 = []
 

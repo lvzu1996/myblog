@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 
+import hashlib
 # Create your models here.
 #
 
@@ -16,12 +17,15 @@ class Pictures(models.Model):
 
 class Accounts(models.Model):
     username = models.CharField(max_length=11)
-    password = models.CharField(max_length=16)
+    password = models.CharField(max_length=256)
     nickname = models.CharField(max_length=16)
     register_time = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
         return self.username
+    def save(self,*args,**kwargs):
+        self.password = hashlib.sha1(self.password+self.username).hexdigest()
+        super(Accounts,self).save(*args,**kwargs)
 
 class Comments(models.Model):
     user = models.CharField(max_length=16)
