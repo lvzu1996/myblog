@@ -41,11 +41,11 @@
         </div>
       </transition>
         <div v-if="show_choices" class="choices move-lvzu">
-          <a href="#/register">RST&LOG</a>
+          <a href="#/register">Sign up & Login</a>
           <span>|</span>
-          <span class="comment-button" @click='_chat'>Chat</span>
+          <span class="comment-button" @click='_chat'>&nbspChat&nbsp&nbsp</span>
           <span>|</span>
-          <span class="comment-button" @click='_conmment'>Comment</span>
+          <span class="comment-button" @click='_conmment'>&nbspComment&nbsp</span>
         </div>
         <transition name="fade">
         <div v-if="show_comments" class="">
