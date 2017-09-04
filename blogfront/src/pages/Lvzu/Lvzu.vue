@@ -53,23 +53,77 @@
     </div>
 
     <div class="bottom">
-      <div class="bottom-single">
 
+      <div class="bottom-single">
+        <div class="left-single">
+          <svg class="botton-icon"  aria-hidden="true">
+            <use xlink:href="#icon-weizhi1"></use>
+          </svg>
+          <span class="bot-left-text">city</span>
+        </div>
+        <div class="right-single">
+          HangZhou
+        </div>
       </div>
-      <div class="bottom-single">
 
+      <div class="bottom-single">
+        <div class="left-single">
+          <svg class="botton-icon"  aria-hidden="true">
+            <use xlink:href="#icon-xuexiao"></use>
+          </svg>
+          <span class="bot-left-text">Degree</span>
+        </div>
+        <div class="right-single">
+          Undergraduate
+        </div>
       </div>
-      <div class="bottom-single">
 
+      <div class="bottom-single">
+        <div class="left-single">
+          <svg class="botton-icon"  aria-hidden="true">
+            <use xlink:href="#icon-shouji1"></use>
+          </svg>
+          <span class="bot-left-text">Phone</span>
+        </div>
+        <div class="right-single">
+          S7Edge
+        </div>
       </div>
-      <div class="bottom-single">
 
+      <div class="bottom-single">
+        <div class="left-single">
+          <svg class="botton-icon"  aria-hidden="true">
+            <use xlink:href="#icon-shejiao1"></use>
+          </svg>
+          <span class="bot-left-text">Wechat</span>
+        </div>
+        <div class="right-single">
+          lvzu_lvzu
+        </div>
       </div>
-      <div class="bottom-single">
 
+      <div class="bottom-single">
+        <div class="left-single">
+          <svg class="botton-icon"  aria-hidden="true">
+            <use xlink:href="#icon-zhiye"></use>
+          </svg>
+          <span class="bot-left-text">Career</span>
+        </div>
+        <div class="right-single">
+          Programer
+        </div>
       </div>
-      <div class="bottom-single">
 
+      <div class="bottom-single">
+        <div class="left-single">
+          <svg class="botton-icon"  aria-hidden="true">
+            <use xlink:href="#icon-gexingqianming"></use>
+          </svg>
+          <span class="bot-left-text">Sign</span>
+        </div>
+        <div class="right-single">
+          A cat
+        </div>
       </div>
     </div>
 

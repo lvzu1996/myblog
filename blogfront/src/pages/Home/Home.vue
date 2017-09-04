@@ -104,6 +104,7 @@ export default {
 
     if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
           this.$router.push({ path:'/about-me' })
+          console.log('shouji');
     } else {
       console.log('pc');
     }
