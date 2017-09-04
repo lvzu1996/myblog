@@ -103,7 +103,7 @@ export default {
     var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
 
     if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
-          t.$router.push({ path:'/about-me' })
+          this.$router.push({ path:'/about-me' })
     } else {
       console.log('pc');
     }
