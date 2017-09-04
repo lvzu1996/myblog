@@ -4,7 +4,7 @@ import Hello from '@/pages/Hello/Hello'
 import Home from '@/pages/Home/Home'
 import Main from '@/pages/Main/Main'
 import Register from '@/pages/Register/Register'
-
+import Lvzu from '@/pages/Lvzu/Lvzu'
 import Test from '@/pages/Test/Test'
 
 Vue.use(Router)
@@ -35,6 +35,11 @@ export default new Router({
       path:'/test',
       name:'Test',
       component:Test
+    },
+    {
+      path:'/about-me',
+      name:'Lvzu',
+      component:Lvzu
     },
   ]
 })
