@@ -1,19 +1,23 @@
 <template>
   <div id="Test">
     <div class="lv-search-div">
-      <lv-search v-bind:width="width" :height="height"></lv-search>
+      <lv-search v-bind:width="width" :onClick="_onClick"></lv-search>
     </div>
 
     <div class="lv-pagination-div">
-      <lv-pagination :selectedNum="selectedNum" :page_size="page_size" :totalAmount="totalAmount"></lv-pagination>
+      <lv-pagination
+      :selectedNum="selectedNum"
+      :totalAmount="totalAmount"
+      :page_size="page_size"
+      :onClick="_onClick"
+      ></lv-pagination>
     </div>
 
     <div class="lv-sort-strip-div">
       <lv-sort-strip
-        :priDir="priDir"
-        :onChange="_onChange"
-        :hrefs="hrefs"
-        >
+      :priDir="priDir"
+      :hrefs="hrefs"
+      :onChange="_onChange">
       </lv-sort-strip>
     </div>
 
@@ -55,9 +59,12 @@ export default {
   methods: {
     _onChange(i) {
       console.log(i);
+    },
+
+    _onClick(i){
+      console.log(i);
     }
   },
-
 
 }
 </script>
