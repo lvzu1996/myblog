@@ -60,7 +60,6 @@ def account_register(request):
     except  Exception,e:
         response['msg'] = str(e)
         response['error_num'] = 1
-        # response['test'] = request.POST.get('username')
     return JsonResponse(response)
 
 @csrf_protect
@@ -109,8 +108,6 @@ def test_model(request):
         page_size = getPageSize(request.GET.get('page_size'))
         page_num = getPageNum(request.GET.get('page_num'))
         search_key= request.GET.get('search_key')
-        print page_size
-        print page_num
 
         if search_key:
             testmodel = TestModel.objects.filter(title__contains=search_key)

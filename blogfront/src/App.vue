@@ -6,7 +6,13 @@
 
 <script>
 export default {
-  name: 'app'
+  name: 'app',
+  data(){
+    return{
+      width:312,
+      height:32,
+    }
+  },
 }
 </script>
 

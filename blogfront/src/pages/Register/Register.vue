@@ -98,6 +98,7 @@
 </template>
 
 <script>
+import mytools from '../../tools/myTools'
 export default {
 
   name: 'Register',
@@ -241,7 +242,7 @@ export default {
         return
       }
       setTimeout(function() {
-        t.register_verifycode = 123456
+        t.register_verifycode = mytools._generateVCode()
       }, 3000)
     },
     _register: function() {
@@ -252,6 +253,10 @@ export default {
       }
       if (t.register_username.length != 11) {
         this.$message.error('您的手机号输入有误，请重新输入');
+        return
+      }
+      if (t.register_verifycode.length != 6) {
+        this.$message.error('您的验证码有误,请重新获取');
         return
       }
       fetch(`http://${t.hostname}/api/account_register`, {
