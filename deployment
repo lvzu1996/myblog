@@ -9,7 +9,7 @@ npm run build
 
 cd ..
 
-python manage.py makemigrations myapp
+
 python manage.py migrate
 python manage.py collectstatic
 
