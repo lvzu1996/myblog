@@ -2,7 +2,7 @@
 #coding=utf-8
 from django.views.decorators.http import require_http_methods
 from django.http import JsonResponse
-from models import Pictures,Accounts,Comments,TestModel,TestModel2
+from models import Pictures,Accounts,Comments,DetailInfo,TestModel,TestModel2
 from django.core import serializers
 from django.views.decorators.csrf import csrf_protect,csrf_exempt
 from functions import *
@@ -62,6 +62,7 @@ def account_register(request):
         response['error_num'] = 1
     return JsonResponse(response)
 
+
 @csrf_protect
 @csrf_exempt
 @require_http_methods(["POST"])
@@ -82,6 +83,34 @@ def account_login(request):
         response['msg'] = 'notRegisterd'
         response['error_num'] = 0
         return JsonResponse(response)
+    return JsonResponse(response)
+
+
+@csrf_protect
+@csrf_exempt
+@require_http_methods(["POST"])
+def set_detailInfo(request):
+    response = {}
+    try:
+        detailInfo = DetailInfo.objects.get(username=request.POST['username'])
+        detailInfo.username=request.POST['username']
+        detailInfo.name=request.POST['name']
+        detailInfo.address=request.POST['address']
+        detailInfo.gender=request.POST['gender']
+        detailInfo.school=request.POST['school']
+        detailInfo.save()
+        response['msg'] = 'success'
+        response['error_num'] = 0
+
+    except  DetailInfo.DoesNotExist:
+        newDetailInfo = DetailInfo(username=request.POST['username'],name=request.POST['name'],address=request.POST['address'],gender=request.POST['gender'],school=request.POST['school'])
+        try:
+            newDetailInfo.save()
+            response['msg'] = 'success'
+            response['error_num'] = 0
+        except  Exception,e:
+            response['msg'] = str(e)
+            response['error_num'] = 1
     return JsonResponse(response)
 
 

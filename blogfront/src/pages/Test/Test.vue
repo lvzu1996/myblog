@@ -21,9 +21,21 @@
       </lv-sort-strip>
     </div>
 
+    <div class="ele-auto-complete">
+        <el-autocomplete
+       class="inline-input"
+       v-model="school"
+       :fetch-suggestions="querySearch"
+       placeholder="请输入学校"
+       :trigger-on-focus="false"
+       @select="handleSelect"
+     ></el-autocomplete>
+    </div>
+
   </div>
 </template>
 <script>
+import schools from './schools.js'
 import Lvment from 'lvment'
 
 var Search = Lvment.Search
@@ -44,8 +56,11 @@ export default {
       totalAmount:100,
       //lv-sort-strip
       priDir:['首页','Lvment主页','注册登录','Lvment测试页面'],
-      hrefs:['/#/','/#/main','/#/register','/#/test']
+      hrefs:['/#/','/#/main','/#/register','/#/test'],
 
+      //element auto-complete
+       school: '',
+       schools:'',
     }
   },
 
@@ -57,14 +72,33 @@ export default {
   },
 
   methods: {
+
     _onChange(i) {
       console.log(i);
     },
 
     _onClick(i){
       console.log(i);
-    }
+    },
+
+    querySearch(queryString, cb) {
+      var schools = this.schools;
+      var results = queryString ? schools.filter(this.createFilter(queryString)) : schools;
+      // 调用 callback 返回建议列表的数据
+      cb(results);
+    },
+    createFilter(queryString) {
+      return (school) => {
+        return (school.value.indexOf(queryString.toLowerCase()) === 0);
+      };
+    },
+
+
   },
+
+  mounted() {
+      this.schools=schools
+  }
 
 }
 </script>

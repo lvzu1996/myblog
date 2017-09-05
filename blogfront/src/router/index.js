@@ -6,6 +6,7 @@ import Main from '@/pages/Main/Main'
 import Register from '@/pages/Register/Register'
 import Lvzu from '@/pages/Lvzu/Lvzu'
 import Test from '@/pages/Test/Test'
+import DetailInfo from '@/pages/DetailInfo/DetailInfo'
 
 Vue.use(Router)
 
@@ -40,6 +41,11 @@ export default new Router({
       path:'/about-me',
       name:'Lvzu',
       component:Lvzu
+    },
+    {
+      path:'/register/detailInfo',
+      name:'detailInfo',
+      component:DetailInfo
     },
   ]
 })

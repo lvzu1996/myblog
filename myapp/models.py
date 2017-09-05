@@ -35,6 +35,16 @@ class Comments(models.Model):
     def __unicode__(self):
         return self.user
 
+class DetailInfo(models.Model):
+    username = models.CharField(max_length=16)
+    name = models.CharField(max_length=255)
+    address = models.CharField(max_length=255)
+    gender = models.CharField(max_length=10)
+    school = models.CharField(max_length=255)
+
+    def __unicode__(self):
+        return self.username
+
 class TestModel(models.Model):
     title = models.CharField(max_length=64)
     user_num = models.CharField(max_length=64)

@@ -2,6 +2,7 @@
   <div id="lvzu-self-intro">
 
     <div class="top">
+      <img src="http://ovfey247f.bkt.clouddn.com/home/overlay" class="lvzu-overlay">
       <svg class="icon" id="pro-icon" aria-hidden="true">
       <use xlink:href="#icon-xia"></use>
     </svg>
@@ -22,19 +23,12 @@
             <use xlink:href="#icon-nanxing"></use>
           </svg>
         </div>
-        <div id="age">
-          21
-        </div>
+
         <div >
           <img id="headpic" src="http://ovfey247f.bkt.clouddn.com/webwxgetmsgimg.jpg" alt="">
         </div>
-        <div>
-          <svg class="icon" id="jiahao-icon" aria-hidden="true">
-            <use xlink:href="#icon-jiahao"></use>
-          </svg>
-        </div>
         <div id="myname">
-          I'm Lvzu
+          Lvzu
         </div>
       </div>
 

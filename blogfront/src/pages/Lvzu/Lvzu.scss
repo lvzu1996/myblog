@@ -1,23 +1,35 @@
-+#lvzu-self-intro{
+#lvzu-self-intro{
   margin: 0 auto;
   text-align: center;
 
 }
 
 .top{
-  background-color: #fff;
+  // background-color: #fff;
   height: 15rem;
-
+  background-image: url('http://ovfey247f.bkt.clouddn.com/about-me/top-bg.jpg');
+  background-size:cover;
+  background-repeat: no-repeat;
 }
+
+.lvzu-overlay{
+  position: 0 !important;
+  display: block;
+  position: absolute;
+  width: 100%;
+  background-size: 100%;
+  height: 15rem;
+}
+
 
 #profile-text{
   font-size: 1.2rem;
   position: absolute;
   top: 1.5rem;
   left:50%;
-  margin-left: -2.2rem;
+  margin-left: -1.95rem;
   letter-spacing:0.05rem;
-  color: rgb(101, 101, 101);
+  color: #fff;
 }
 
 #pro-icon{
@@ -39,20 +51,13 @@
 
   #gender-icon{
     position: absolute;
-    top:6rem;
-    left: 5.2rem;
+    top:10rem;
+    left: 13.2rem;
     width: 1.25rem;
     height: 1.25rem;
   }
 
-  #age{
-    position: absolute;
-    top:6.1rem;
-    left: 6.9rem;
-    font-weight: 700;
-    font-size: 1rem;
-    color: rgb(60, 146, 236);
-  }
+
 
   #headpic{
     position: absolute;
@@ -63,18 +68,12 @@
     border-radius: 50%;
   }
 
-  #jiahao-icon{
-    top: 5.5rem;
-    position: absolute;
-    right: 5rem;
-    width: 2.2rem;
-    height: 2.2rem;
-  }
 
   #myname{
     position: absolute;
-    top: 10rem;
-    left: 9.7rem;
+    top: 10.1rem;
+    left: 10.6rem;
+    color: #fff;
   }
 
   #gerenxinxi-icon{
@@ -82,7 +81,7 @@
     height: 2rem;
     position: absolute;
     top: 12rem;
-    left: 6.25rem;
+    left: 4.25rem;
   }
 
   #zhaopian-icon{
@@ -98,7 +97,7 @@
     height: 2rem;
     position: absolute;
     top: 12rem;
-    left: 15.25rem;
+    left: 17.25rem;
   }
 
 .bottom{

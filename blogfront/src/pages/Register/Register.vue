@@ -275,7 +275,9 @@ export default {
               type: 'success'
             });
             setTimeout(function () {
-              t.isLog = true
+              // t.isLog = true
+              localStorage.username = t.register_username
+              t.$router.push({ path:'/register/detailInfo' })
             },1000)
           } else if (re.msg == 'registerd username') {
             this.$message({
