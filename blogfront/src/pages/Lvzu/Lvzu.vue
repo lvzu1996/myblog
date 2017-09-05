@@ -127,9 +127,9 @@
 
 
     <transition name="fade">
-      <div id="picture">
-        <div class="single-pic" v-for="elem,index in picUrls" :key="elem.key">
-          <img :src="picUrls[index]" >
+      <div id="picture" v-if="showPic">
+        <div class="single-pic-div" v-for="elem,index in picUrls" :key="elem.key">
+          <img :src="picUrls[index]" class="single-pic" >
         </div>
       </div>
     </transition>
@@ -149,7 +149,7 @@ export default {
       showInfo:true,
       showPic:false,
       showTrends:false,
-      picUrls:['','','','','',''],
+      picUrls:['http://ovfey247f.bkt.clouddn.com/about-me/pic1.jpg','http://ovfey247f.bkt.clouddn.com/about-me/pic2.jpg','http://ovfey247f.bkt.clouddn.com/about-me/pic3.jpg','http://ovfey247f.bkt.clouddn.com/about-me/pic4.jpg','http://ovfey247f.bkt.clouddn.com/about-me/pic5.jpg','http://ovfey247f.bkt.clouddn.com/about-me/pic6.jpg'],
     }
   },
 
