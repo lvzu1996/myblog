@@ -29,6 +29,7 @@ ALLOWED_HOSTS = [
 	'localhost',
 	'127.0.0.1',
 	'47.94.129.112',
+	'lvzu.site',
 ]
 
 

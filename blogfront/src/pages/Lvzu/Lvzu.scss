@@ -1,4 +1,4 @@
-#lvzu-self-intro{
++#lvzu-self-intro{
   margin: 0 auto;
   text-align: center;
 
@@ -160,4 +160,25 @@
     vertical-align: -0.15em;
     fill: currentColor;
     overflow: hidden;
+}
+
+
+#picture{
+  display: flex;
+  flex-direction:row;
+  flex-wrap: wrap;
+}
+
+.single-pic{
+  flex-grow:1;
+  
+}
+
+
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active in below version 2.1.8 */ {
+  opacity: 0
 }

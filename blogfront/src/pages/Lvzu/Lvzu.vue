@@ -39,13 +39,13 @@
       </div>
 
       <div class="choose-icons">
-        <svg class="icon" id="gerenxinxi-icon" aria-hidden="true">
+        <svg class="icon" id="gerenxinxi-icon" aria-hidden="true" @click="_showInfo()">
           <use xlink:href="#icon-gerenxinxi"></use>
         </svg>
-        <svg class="icon" id="zhaopian-icon" aria-hidden="true">
+        <svg class="icon" id="zhaopian-icon" aria-hidden="true" @click="_showPic()">
           <use xlink:href="#icon-tupian"></use>
         </svg>
-        <svg class="icon" id="dongtai-icon" aria-hidden="true">
+        <svg class="icon" id="dongtai-icon" aria-hidden="true" @click="_showTrends()">
           <use xlink:href="#icon-iconquan04"></use>
         </svg>
       </div>
@@ -54,77 +54,87 @@
 
     <div class="bottom">
 
-      <div class="bottom-single">
-        <div class="left-single">
-          <svg class="botton-icon"  aria-hidden="true">
-            <use xlink:href="#icon-weizhi1"></use>
-          </svg>
-          <span class="bot-left-text">city</span>
+    <transition name="fade">
+      <div id="info" v-if="showInfo">
+        <div class="bottom-single">
+          <div class="left-single">
+            <svg class="botton-icon"  aria-hidden="true">
+              <use xlink:href="#icon-weizhi1"></use>
+            </svg>
+            <span class="bot-left-text">city</span>
+          </div>
+          <div class="right-single">
+            HangZhou
+          </div>
         </div>
-        <div class="right-single">
-          HangZhou
+        <div class="bottom-single">
+          <div class="left-single">
+            <svg class="botton-icon"  aria-hidden="true">
+              <use xlink:href="#icon-xuexiao"></use>
+            </svg>
+            <span class="bot-left-text">Degree</span>
+          </div>
+          <div class="right-single">
+            Undergraduate
+          </div>
+        </div>
+        <div class="bottom-single">
+          <div class="left-single">
+            <svg class="botton-icon"  aria-hidden="true">
+              <use xlink:href="#icon-shouji1"></use>
+            </svg>
+            <span class="bot-left-text">Phone</span>
+          </div>
+          <div class="right-single">
+            S7Edge
+          </div>
+        </div>
+        <div class="bottom-single">
+          <div class="left-single">
+            <svg class="botton-icon"  aria-hidden="true">
+              <use xlink:href="#icon-shejiao1"></use>
+            </svg>
+            <span class="bot-left-text">Wechat</span>
+          </div>
+          <div class="right-single">
+            lvzu_lvzu
+          </div>
+        </div>
+        <div class="bottom-single">
+          <div class="left-single">
+            <svg class="botton-icon"  aria-hidden="true">
+              <use xlink:href="#icon-zhiye"></use>
+            </svg>
+            <span class="bot-left-text">Career</span>
+          </div>
+          <div class="right-single">
+            Programer
+          </div>
+        </div>
+        <div class="bottom-single">
+          <div class="left-single">
+            <svg class="botton-icon"  aria-hidden="true">
+              <use xlink:href="#icon-gexingqianming"></use>
+            </svg>
+            <span class="bot-left-text">Sign</span>
+          </div>
+          <div class="right-single">
+            A cat
+          </div>
         </div>
       </div>
+    </transition>
 
-      <div class="bottom-single">
-        <div class="left-single">
-          <svg class="botton-icon"  aria-hidden="true">
-            <use xlink:href="#icon-xuexiao"></use>
-          </svg>
-          <span class="bot-left-text">Degree</span>
-        </div>
-        <div class="right-single">
-          Undergraduate
-        </div>
-      </div>
 
-      <div class="bottom-single">
-        <div class="left-single">
-          <svg class="botton-icon"  aria-hidden="true">
-            <use xlink:href="#icon-shouji1"></use>
-          </svg>
-          <span class="bot-left-text">Phone</span>
-        </div>
-        <div class="right-single">
-          S7Edge
+    <transition name="fade">
+      <div id="picture">
+        <div class="single-pic" v-for="elem,index in picUrls" :key="elem.key">
+          <img :src="picUrls[index]" >
         </div>
       </div>
+    </transition>
 
-      <div class="bottom-single">
-        <div class="left-single">
-          <svg class="botton-icon"  aria-hidden="true">
-            <use xlink:href="#icon-shejiao1"></use>
-          </svg>
-          <span class="bot-left-text">Wechat</span>
-        </div>
-        <div class="right-single">
-          lvzu_lvzu
-        </div>
-      </div>
 
-      <div class="bottom-single">
-        <div class="left-single">
-          <svg class="botton-icon"  aria-hidden="true">
-            <use xlink:href="#icon-zhiye"></use>
-          </svg>
-          <span class="bot-left-text">Career</span>
-        </div>
-        <div class="right-single">
-          Programer
-        </div>
-      </div>
-
-      <div class="bottom-single">
-        <div class="left-single">
-          <svg class="botton-icon"  aria-hidden="true">
-            <use xlink:href="#icon-gexingqianming"></use>
-          </svg>
-          <span class="bot-left-text">Sign</span>
-        </div>
-        <div class="right-single">
-          A cat
-        </div>
-      </div>
     </div>
 
   </div>
@@ -136,8 +146,29 @@ export default {
 
   data(){
     return {
-
+      showInfo:true,
+      showPic:false,
+      showTrends:false,
+      picUrls:['','','','','',''],
     }
+  },
+
+  methods: {
+    _showInfo() {
+      this.showInfo = true
+      this.showPic = false
+      this.showTrends = false
+    },
+    _showPic(){
+      this.showInfo = false
+      this.showPic = true
+      this.showTrends = false
+    },
+    _showTrends(){
+      this.showInfo = false
+      this.showPic = false
+      this.showTrends = true
+    },
   },
 
   beforeMount() {
