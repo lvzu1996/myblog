@@ -7,3 +7,14 @@ export default{
     return Num
   },
 }
+
+
+// var testStartTime = new Date().getTime(); add at start
+var _logRunTime = function () {
+  let testEndTime = new Date().getTime();
+  console.log("runtime: "+(testEndTime-testStartTime)+" ");
+}
+var _getRunTime = function () {
+   let testEndTime = new Date().getTime();
+   return testEndTime-testStartTime
+}

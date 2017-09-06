@@ -1,18 +1,18 @@
 <template>
   <div id="DetailInfo">
 
-    <div class="detailInfo-main-part">
+    <div class="detailInfo-main-part" v-if="step===3">
 
       <div class="detailInfo-steps-div">
         <el-steps :space="200" :active="step">
           <el-step title="步骤 1" icon="edit"></el-step>
-          <el-step title="步骤 2" icon="information"></el-step>
-          <el-step title="步骤 3" icon="picture"></el-step>
+          <el-step title="步骤 2" icon="picture"></el-step>
+          <el-step title="步骤 3" icon="information"></el-step>
         </el-steps>
       </div>
 
     <transition name="fade">
-      <div class="detaiInfo-form" v-if="step===2">
+      <div class="detaiInfo-form">
         <el-form ref="form" :model="form" label-width="250px">
 
           <el-form-item label="你是凹还是凸？">
@@ -51,7 +51,7 @@
            </el-form-item>
 
            <el-form-item>
-             <el-button type="primary" @click="_onSubmit">提交信息</el-button>
+             <el-button type="primary" @click="_onSubmitStep3">提交信息</el-button>
              <el-button type="warning">过两天再来填</el-button>
            </el-form-item>
 
@@ -61,34 +61,74 @@
 
     </div>
 
-
-
+    <div class="" v-if="step==2">
+      <div class="detailInfo-step3-div">
+        <el-steps :space="200" :active="2">
+          <el-step title="步骤 1" icon="edit"></el-step>
+          <el-step title="步骤 2" icon="picture"></el-step>
+          <el-step title="步骤 3" icon="information"></el-step>
+        </el-steps>
+      </div>
+      <transition name="fade">
+        <div class="headpic-uploader">
+          <div class="container">
+            <div class="imageBox">
+              <div class="thumbBox"></div>
+              <div class="spinner" style="display: none">Loading...</div>
+            </div>
+            <div class="action">
+              <!-- <input type="file" id="file" style=" width: 200px">-->
+              <div class="new-contentarea tc"> <a href="javascript:void(0)" class="upload-img">
+                <label for="upload-file">上传图像</label>
+                </a>
+                <input type="file" class="" name="upload-file" id="upload-file" />
+              </div>
+              <input type="button" id="btnCrop"  class="Btnsty_peyton" value="裁切">
+              <input type="button" id="btnZoomIn" class="Btnsty_peyton" value="+"  >
+              <input type="button" id="btnZoomOut" class="Btnsty_peyton" value="-" >
+            </div>
+            <div class="cropped"></div>
+          </div>
+          <el-button type="primary" @click="_onSubmitStep2">就决定是这个头像了</el-button>
+        </div>
+      </transition>
+    </div>
 
 
   </div>
 </template>
+
 <script>
+import './cropbox.js'
+
 import schools from './schools.js'
+import AliyunOssUpload from '../../component/AliyunOssUpload.vue'
+
 
 export default {
 
   name: "DetailInfo",
 
   data(){
-    return{
-      hostname:'47.94.129.112',
-      step:2,
-      form:{
-        name: '',
-        address: '',
-        birthday:'',
-        gender:'',
-        school:'',
-      },
-       schools:'',
+    return {
+    //请求主机地址
+    hostname: '47.94.129.112',
+    //进行到的步骤
+    step: 2,
 
-    }
-  },
+    //表单数据
+    form: {
+      name: '',
+      address: '',
+      birthday: '',
+      gender: '',
+      school: '',
+    },
+    schools: '',
+
+
+  }
+},
 
   methods: {
     onSubmit() {
@@ -110,9 +150,15 @@ export default {
         return (school.value.indexOf(queryString.toLowerCase()) === 0);
       };
     },
-    _onSubmit(){
+
+    _onSubmitStep2(){
+      this.step = 3
+    },
+
+    _onSubmitStep3(){
       const t = this
       //做判断处理
+      //
 
       //判断通过后
       fetch(`http://${t.hostname}/api/set_detailInfo`, {
@@ -127,7 +173,6 @@ export default {
         .then(re => {
           if(re.msg == "success"){
             //表单提交成功
-            this.step = 3;
           }
         })
 
@@ -137,7 +182,44 @@ export default {
 
     mounted() {
       this.schools=schools
+
+      $(window).load(function() {
+        this.step = 3;
+        var options =
+        {
+          thumbBox: '.thumbBox',
+          spinner: '.spinner',
+          imgSrc: '../../../static/imgs/avatar.jpg'
+        }
+        var cropper = $('.imageBox').cropbox(options);
+        $('#upload-file').on('change', function(){
+          var reader = new FileReader();
+          reader.onload = function(e) {
+            options.imgSrc = e.target.result;
+            cropper = $('.imageBox').cropbox(options);
+          }
+          reader.readAsDataURL(this.files[0]);
+          // this.files = [];
+        })
+        $('#btnCrop').on('click', function(){
+          var img = cropper.getDataURL();
+          console.log(img);
+          $('.cropped').html('');
+          $('.cropped').append('<img src="'+img+'" align="absmiddle" style="width:64px;margin-top:4px;border-radius:64px;box-shadow:0px 0px 12px #7E7E7E;" ><p>64px*64px</p>');
+          $('.cropped').append('<img src="'+img+'" align="absmiddle" style="width:128px;margin-top:4px;border-radius:128px;box-shadow:0px 0px 12px #7E7E7E;"><p>128px*128px</p>');
+          $('.cropped').append('<img src="'+img+'" align="absmiddle" style="width:180px;margin-top:4px;border-radius:180px;box-shadow:0px 0px 12px #7E7E7E;"><p>180px*180px</p>');
+        })
+        $('#btnZoomIn').on('click', function(){
+          cropper.zoomIn();
+        })
+        $('#btnZoomOut').on('click', function(){
+          cropper.zoomOut();
+        })
+      });
     },
+
+
+
 
 }
 </script>

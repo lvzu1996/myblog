@@ -200,7 +200,7 @@ export default {
               message: '登录成功！',
               type: 'success'
             });
-
+            localStorage.username = t.log_username
             setTimeout(function () {
                 t.$router.push({ path:'/main' })
             },2500)

@@ -10,7 +10,9 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "ali-oss": "^4.10.1",
     "element-ui": "^1.4.2",
+    "jquery": "^3.2.1",
     "lvment": "^2.0.5",
     "moment": "^2.18.1",
     "object-param": "^1.0.2",
