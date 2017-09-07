@@ -1,5 +1,5 @@
 //主登录框
-.detailInfo-main-part {
+#detailInfo-main-part3 {
     display: flex;
     flex-direction: column;
     // justify-content: center;
@@ -15,14 +15,40 @@
     font-family: monaco, -apple-system,SF UI Display,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif;
 }
 
-.detailInfo-steps-div{
+#detailInfo-main-part2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    width: 1000px;
+    height: 800px;
+    overflow: hidden;
+    text-align: center;
+    margin: 5% 23%;
+    vertical-align: middle;
+    background-color: #ffffff;
+    box-shadow: 0 0 15px 15px #d9d9d9;
+    font-family: monaco, -apple-system,SF UI Display,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif;
+}
+
+.headpic-uploader{
+  width: 100%;
+margin-left: 20%;
+margin-top: 40px;
+}
+
+.detailInfo-step3-div{
   margin-top: 40px;
   padding-left: 13%;
 }
 
-.detailInfo-step3-div{
-  padding: 0 20%;
-  margin-top: 40px;
+.detailInfo-step2-div{
+  margin-left: 25%;
+  margin-top: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // padding: 0 20%;
 }
 
 .detaiInfo-form{
@@ -40,12 +66,28 @@
 }
 
 
+#headpic-sub-button{
+     width: 400px;
+    display: inline-block;
+    margin-bottom: 10px;
+    height: 57px;
+    line-height: 57px;
+    font-size: 20px;
+    color: #FFFFFF;
+    margin:0px 2px;
+    background-color: #58B7FF;
+    border-radius: 3px;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0px 0px 5px #B0B0B0;
+    border: 0px #fff solid;
+}
 
 //***************
 @charset "utf-8";
 .container {
 	width: 400px;
-	margin: 60px auto 0 32%;
+	// margin: 60px auto 0 32%;
 	position: relative;
 	font-family: 微软雅黑;
 	font-size: 12px;
@@ -107,7 +149,8 @@
 	line-height: 400px;
 	background: rgba(0,0,0,0.7);
 }
-.Btnsty_peyton{ float: right;
+.Btnsty_peyton{
+  float: right;
    width: 66px;
   display: inline-block;
   margin-bottom: 10px;

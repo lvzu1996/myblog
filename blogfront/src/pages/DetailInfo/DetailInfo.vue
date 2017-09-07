@@ -1,9 +1,9 @@
 <template>
   <div id="DetailInfo">
 
-    <div class="detailInfo-main-part" v-if="step===3">
+    <div id="detailInfo-main-part3" v-if="step===3">
 
-      <div class="detailInfo-steps-div">
+      <div class="detailInfo-step3-div">
         <el-steps :space="200" :active="step">
           <el-step title="步骤 1" icon="edit"></el-step>
           <el-step title="步骤 2" icon="picture"></el-step>
@@ -61,8 +61,9 @@
 
     </div>
 
-    <div class="" v-if="step==2">
-      <div class="detailInfo-step3-div">
+
+<div id="detailInfo-main-part2" v-if="step==2">
+      <div class="detailInfo-step2-div">
         <el-steps :space="200" :active="2">
           <el-step title="步骤 1" icon="edit"></el-step>
           <el-step title="步骤 2" icon="picture"></el-step>
@@ -86,14 +87,13 @@
               <input type="button" id="btnCrop"  class="Btnsty_peyton" value="裁切">
               <input type="button" id="btnZoomIn" class="Btnsty_peyton" value="+"  >
               <input type="button" id="btnZoomOut" class="Btnsty_peyton" value="-" >
+              <input type="button" id="headpic-sub-button"  value="就决定是这个头像了" @click="_onSubmitStep2">
             </div>
             <div class="cropped"></div>
           </div>
-          <el-button type="primary" @click="_onSubmitStep2">就决定是这个头像了</el-button>
         </div>
       </transition>
-    </div>
-
+</div>
 
   </div>
 </template>
