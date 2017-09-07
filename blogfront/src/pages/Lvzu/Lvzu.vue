@@ -166,6 +166,7 @@ export default {
   },
 
   beforeMount() {
+    console.log("lvzu beforeMount");
 		(function (doc, win) {
 					var docEl = doc.documentElement,
 					resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',

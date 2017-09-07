@@ -182,9 +182,8 @@ export default {
 
     mounted() {
       this.schools=schools
-
-      $(window).load(function() {
-        this.step = 3;
+      console.log("DetailInfo mounted");
+      // $(window).load(function() {
         var options =
         {
           thumbBox: '.thumbBox',
@@ -215,7 +214,8 @@ export default {
         $('#btnZoomOut').on('click', function(){
           cropper.zoomOut();
         })
-      });
+      // }
+    // );
     },
 
 

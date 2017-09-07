@@ -9,8 +9,7 @@ export default {
   name: 'app',
   data(){
     return{
-      width:312,
-      height:32,
+
     }
   },
 }
