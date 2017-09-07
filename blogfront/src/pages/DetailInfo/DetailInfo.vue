@@ -173,6 +173,13 @@ export default {
         .then(re => {
           if(re.msg == "success"){
             //表单提交成功
+            this.$message({
+              message: '信息提交成功！',
+              type: 'success'
+            });
+            setTimeout(function () {
+              t.$router.push({ path:'/main' })
+            },1500)
           }
         })
 
