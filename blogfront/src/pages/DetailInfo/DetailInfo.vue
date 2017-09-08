@@ -135,6 +135,7 @@ export default {
       birthday: '',
       gender: '',
       school: '',
+      headpic_url:'',
     },
     schools: '',
 
@@ -143,6 +144,36 @@ export default {
 },
 
   methods: {
+    headpicUpload(){
+      const t = this
+      var imgFile = $('#upload-file').get(0).files[0];
+      var result = client.multipartUpload('headpics/testhead2323231111.jpg',imgFile,)
+      .then(function (re) {
+         if(re.res.status === 200){
+           t.$message({
+             message: '头像上传成功',
+             type: 'success'
+           });
+           //存头像地址
+           t.headpic_url = re.res.requestUrls[0]
+           setTimeout(function () {
+             t.step = 3
+           },1500)
+         }
+       },function (re) {
+
+         t.$alert('我是不会给你做头像的～。～', '自己上传头像', {
+                  confirmButtonText: '确定',
+                  callback: action => {
+                    t.$message({
+                      type: 'info',
+                      message: '自拍一张上传啊，肯定比她萌'
+                    });
+                  }
+                });
+
+       })
+    },
     onSubmit() {
       console.log('submit!');
     },
@@ -164,7 +195,8 @@ export default {
     },
 
     _onSubmitStep2(){
-      this.step = 3
+      this.headpicUpload()
+      // this.step = 3
     },
 
     _onSubmitStep3(){
@@ -175,7 +207,7 @@ export default {
       //判断通过后
       fetch(`http://${t.hostname}/api/set_detailInfo`, {
           method: 'post',
-          body: 'username=' + localStorage.username + '&name=' + t.form.name + '&address=' + t.form.address + '&birthday=' + t.form.birthday + '&gender=' + t.form.gender + '&school=' + t.form.school ,
+          body: 'username=' + localStorage.username + '&name=' + t.form.name + '&address=' + t.form.address + '&birthday=' + t.form.birthday + '&gender=' + t.form.gender + '&school=' + t.form.school +'&headpic_url=' + t.form.headpic_url,
           headers: {
             "Accept": "application/json",
             "Content-Type": "application/x-www-form-urlencoded"
@@ -220,17 +252,6 @@ export default {
         })
         $('#btnCrop').on('click', function(){
           var img = cropper.getDataURL();
-
-          var imgFile = $('#upload-file').get(0).files[0];
-          console.log(imgFile);
-
-          var result = client.multipartUpload('headpics/testhead2323231111.jpg',imgFile,)
-          .then(function (re) {
-             console.log(re);
-           },function (re) {
-             console.log(re);
-           })
-
           $('.cropped').html('');
           $('.cropped').append('<img src="'+img+'" align="absmiddle" style="width:64px;margin-top:4px;border-radius:64px;box-shadow:0px 0px 12px #7E7E7E;" ><p>64px*64px</p>');
           $('.cropped').append('<img src="'+img+'" align="absmiddle" style="width:128px;margin-top:4px;border-radius:128px;box-shadow:0px 0px 12px #7E7E7E;"><p>128px*128px</p>');

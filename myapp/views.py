@@ -93,11 +93,12 @@ def set_detailInfo(request):
     response = {}
     try:
         detailInfo = DetailInfo.objects.get(username=request.POST['username'])
-        detailInfo.username=request.POST['username']
-        detailInfo.name=request.POST['name']
-        detailInfo.address=request.POST['address']
-        detailInfo.gender=request.POST['gender']
-        detailInfo.school=request.POST['school']
+        # detailInfo.username=request.POST['username']
+        detailInfo.name=(request.POST['name'] if(request.POST['name']) else detailInfo.name)
+        detailInfo.address=(request.POST['address'] if(request.POST['address']) else detailInfo.address)
+        detailInfo.gender=(request.POST['gender'] if(request.POST['gender']) else detailInfo.gender)
+        detailInfo.school=(request.POST['school'] if(request.POST['school']) else detailInfo.school)
+        detailInfo.headpic_url=(request.POST['headpic_url'] if(request.POST['headpic_url']) else detailInfo.headpic_url)
         detailInfo.save()
         response['msg'] = 'success'
         response['error_num'] = 0

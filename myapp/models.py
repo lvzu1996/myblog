@@ -41,7 +41,8 @@ class DetailInfo(models.Model):
     address = models.CharField(max_length=255)
     gender = models.CharField(max_length=10)
     school = models.CharField(max_length=255)
-
+    headpic_url = models.URLField()
+    
     def __unicode__(self):
         return self.username
 
