@@ -37,12 +37,12 @@ class Comments(models.Model):
 
 class DetailInfo(models.Model):
     username = models.CharField(max_length=16)
-    name = models.CharField(max_length=255)
-    address = models.CharField(max_length=255)
-    gender = models.CharField(max_length=10)
-    school = models.CharField(max_length=255)
-    headpic_url = models.URLField()
-    
+    name = models.CharField(max_length=255,blank=True)
+    address = models.CharField(max_length=255,blank=True)
+    gender = models.CharField(max_length=10,blank=True)
+    school = models.CharField(max_length=255,blank=True)
+    headpic_url = models.URLField(blank=True)
+
     def __unicode__(self):
         return self.username
 
