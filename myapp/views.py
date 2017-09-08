@@ -5,7 +5,7 @@ from django.http import JsonResponse
 from models import Pictures,Accounts,Comments,DetailInfo,TestModel,TestModel2
 from django.core import serializers
 from django.views.decorators.csrf import csrf_protect,csrf_exempt
-from functions import *
+import functions
 import hashlib
 import json
 import urllib
@@ -93,20 +93,26 @@ def set_detailInfo(request):
     response = {}
     try:
         detailInfo = DetailInfo.objects.get(username=request.POST['username'])
-        # detailInfo.username=request.POST['username']
-        detailInfo.name=getDetailInfo(detailInfo.name,request.POST['name'])
-        detailInfo.address=getDetailInfo(detailInfo.address,request.POST['address'])
-        detailInfo.gender=getDetailInfo(detailInfo.gender,request.POST['gender'])
-        detailInfo.school=getDetailInfo(detailInfo.school,request.POST['school'])
-        detailInfo.headpic_url=getDetailInfo(detailInfo.headpic_url,request.POST['headpic_url'])
+        detailInfo.name=functions._getDetailInfo(detailInfo.name,request.POST['name'])
+        detailInfo.address=functions._getDetailInfo(detailInfo.address,request.POST['address'])
+        detailInfo.gender=functions._getDetailInfo(detailInfo.gender,request.POST['gender'])
+        detailInfo.school=functions._getDetailInfo(detailInfo.school,request.POST['school'])
+        detailInfo.headpic_url=functions._getDetailInfo(detailInfo.headpic_url,request.POST['headpic_url'])
         detailInfo.save()
         response['msg'] = 'success'
         response['error_num'] = 0
+        return JsonResponse(response)
 
     except  DetailInfo.DoesNotExist:
-        newDetailInfo = DetailInfo(username=request.POST['username'],name=request.POST['name'],address=request.POST['address'],gender=request.POST['gender'],school=request.POST['school'])
+        username = request.POST['username']
+        name=request.POST['name']
+        address=request.POST['address']
+        gender=request.POST['gender']
+        school=request.POST['school']
+        headpic_url=request.POST['headpic_url']
+        detailInfo = DetailInfo(username=username,name=name,address=address,gender=gender,school=school,headpic_url=headpic_url)
         try:
-            newDetailInfo.save()
+            detailInfo.save()
             response['msg'] = 'success'
             response['error_num'] = 0
         except  Exception,e:
@@ -135,8 +141,8 @@ def comment(request):
 def test_model(request):
     response = {}
     try:
-        page_size = getPageSize(request.GET.get('page_size'))
-        page_num = getPageNum(request.GET.get('page_num'))
+        page_size = functions._getPageSize(request.GET.get('page_size'))
+        page_num = functions._getPageNum(request.GET.get('page_num'))
         search_key= request.GET.get('search_key')
 
         if search_key:
