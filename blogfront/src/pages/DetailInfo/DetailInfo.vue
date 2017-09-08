@@ -157,7 +157,7 @@ export default {
            t.form.headpic_url = re.res.requestUrls[0]
            fetch(`http://${t.hostname}/api/set_detailInfo`, {
                method: 'post',
-               body: 'username=' + localStorage.username + '&name=' + '' + '&address=' + '' + '&birthday=' + '' + '&gender=' + '' + '&school=' + '' + '&headpic_url' + t.form.headpic_url,
+               body: 'username=' + localStorage.username + '&name=' + '' + '&address=' + '' + '&birthday=' + '' + '&gender=' + '' + '&school=' + '' + '&headpic_url=' + t.form.headpic_url,
                headers: {
                  "Accept": "application/json",
                  "Content-Type": "application/x-www-form-urlencoded"
@@ -227,7 +227,7 @@ export default {
       //判断通过后
       fetch(`http://${t.hostname}/api/set_detailInfo`, {
           method: 'post',
-          body: 'username=' + localStorage.username + '&name=' + t.form.name + '&address=' + t.form.address + '&birthday=' + t.form.birthday + '&gender=' + t.form.gender + '&school=' + t.form.school + '&headpic_url' + '',
+          body: 'username=' + localStorage.username + '&name=' + t.form.name + '&address=' + t.form.address + '&birthday=' + t.form.birthday + '&gender=' + t.form.gender + '&school=' + t.form.school + '&headpic_url=' + '',
           headers: {
             "Accept": "application/json",
             "Content-Type": "application/x-www-form-urlencoded"
