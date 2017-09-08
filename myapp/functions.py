@@ -16,3 +16,10 @@ def getPageSize(_PAGESIZE):
         return _PAGESIZE
     else:
         return '9999'
+
+
+#如果请求中有新数据 则保存为新数据 否则返回旧数据
+def getDetailInfo(pre,req):
+    if(req):
+        return req
+    return pre

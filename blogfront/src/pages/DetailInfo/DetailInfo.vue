@@ -125,6 +125,7 @@ export default {
     return {
     //请求主机地址
     hostname: '47.94.129.112',
+    ossFolder:'headpics/',
     //进行到的步骤
     step: 2,
 
@@ -146,19 +147,38 @@ export default {
   methods: {
     headpicUpload(){
       const t = this
-      var imgFile = $('#upload-file').get(0).files[0];
-      var result = client.multipartUpload('headpics/testhead2323231111.jpg',imgFile,)
+      let username = localStorage.username || myTools._generateVCode()
+      var _routename = t.ossFolder+username+'.jpg'
+      var _imgFile = $('#upload-file').get(0).files[0];
+      client.multipartUpload(_routename,_imgFile,)
       .then(function (re) {
          if(re.res.status === 200){
-           t.$message({
-             message: '头像上传成功',
-             type: 'success'
-           });
            //存头像地址
-           t.headpic_url = re.res.requestUrls[0]
-           setTimeout(function () {
-             t.step = 3
-           },1500)
+           t.form.headpic_url = re.res.requestUrls[0]
+           fetch(`http://${t.hostname}/api/set_detailInfo`, {
+               method: 'post',
+               body:'username=' + username + '&headpic_url='+ t.form.headpic_url,
+               headers: {
+                 "Accept": "application/json",
+                 "Content-Type": "application/x-www-form-urlencoded"
+               },
+             }).then(re => re.json())
+             .then(re => {
+               if(re.msg == "success"){
+                 t.$message({
+                   message: '头像上传成功',
+                   type: 'success'
+                 });
+                setTimeout(function () {
+                  t.step = 3
+                },1500)
+               }else{
+                 this.$message({
+                   message: '头像信息储存失败，请刷新重试',
+                   type: 'error'
+                 });
+               }
+             })
          }
        },function (re) {
 
@@ -207,7 +227,7 @@ export default {
       //判断通过后
       fetch(`http://${t.hostname}/api/set_detailInfo`, {
           method: 'post',
-          body: 'username=' + localStorage.username + '&name=' + t.form.name + '&address=' + t.form.address + '&birthday=' + t.form.birthday + '&gender=' + t.form.gender + '&school=' + t.form.school +'&headpic_url=' + t.form.headpic_url,
+          body: 'username=' + localStorage.username + '&name=' + t.form.name + '&address=' + t.form.address + '&birthday=' + t.form.birthday + '&gender=' + t.form.gender + '&school=' + t.form.school,
           headers: {
             "Accept": "application/json",
             "Content-Type": "application/x-www-form-urlencoded"
