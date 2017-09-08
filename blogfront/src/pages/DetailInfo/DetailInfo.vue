@@ -82,7 +82,7 @@
               <div class="new-contentarea tc"> <a href="javascript:void(0)" class="upload-img">
                 <label for="upload-file">上传图像</label>
                 </a>
-                <input type="file" class="" name="upload-file" id="upload-file" />
+                <input type="file"  class="" name="upload-file" id="upload-file" />
               </div>
               <input type="button" id="btnCrop"  class="Btnsty_peyton" value="裁切">
               <input type="button" id="btnZoomIn" class="Btnsty_peyton" value="+"  >
@@ -100,9 +100,21 @@
 
 <script>
 import './cropbox.js'
+import myTools from '../../tools/myTools.js'
+
+
+var client = new OSS.Wrapper({
+  // region: 'oss-cn-beijing',
+  endpoint: 'oss-cn-beijing.aliyuncs.com',
+  //云账号AccessKey有所有API访问权限，建议遵循阿里云安全最佳实践，部署在服务端使用RAM子账号或STS，部署在客户端使用STS。
+  accessKeyId: 'LTAI5RoJ6lXHDDJv',
+  accessKeySecret: 'UQ5xgbjtwysBDBVUknFRRBFUVGKYDT',
+  bucket: 'myblog-oss'
+});
 
 import schools from './schools.js'
-import AliyunOssUpload from '../../component/AliyunOssUpload.vue'
+
+// import AliyunOssUpload from '../../component/AliyunOssUpload.vue'
 
 
 export default {
@@ -190,7 +202,6 @@ export default {
     mounted() {
       this.schools=schools
       console.log("DetailInfo mounted");
-      // $(window).load(function() {
         var options =
         {
           thumbBox: '.thumbBox',
@@ -209,7 +220,17 @@ export default {
         })
         $('#btnCrop').on('click', function(){
           var img = cropper.getDataURL();
-          console.log(img);
+
+          var imgFile = $('#upload-file').get(0).files[0];
+          console.log(imgFile);
+
+          var result = client.multipartUpload('headpics/testhead2323231111.jpg',imgFile,)
+          .then(function (re) {
+             console.log(re);
+           },function (re) {
+             console.log(re);
+           })
+
           $('.cropped').html('');
           $('.cropped').append('<img src="'+img+'" align="absmiddle" style="width:64px;margin-top:4px;border-radius:64px;box-shadow:0px 0px 12px #7E7E7E;" ><p>64px*64px</p>');
           $('.cropped').append('<img src="'+img+'" align="absmiddle" style="width:128px;margin-top:4px;border-radius:128px;box-shadow:0px 0px 12px #7E7E7E;"><p>128px*128px</p>');
@@ -221,11 +242,7 @@ export default {
         $('#btnZoomOut').on('click', function(){
           cropper.zoomOut();
         })
-      // }
-    // );
     },
-
-
 
 
 }

@@ -98,7 +98,7 @@
 </template>
 
 <script>
-import mytools from '../../tools/myTools'
+import myTools from '../../tools/myTools'
 export default {
 
   name: 'Register',
@@ -242,7 +242,7 @@ export default {
         return
       }
       setTimeout(function() {
-        t.register_verifycode = mytools._generateVCode()
+        t.register_verifycode = myTools._generateVCode()
       }, 3000)
     },
     _register: function() {

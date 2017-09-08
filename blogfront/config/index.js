@@ -1,6 +1,14 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 var path = require('path')
 
+// var client = new OSS.Wrapper({
+//   region: 'oss-cn-beijing',
+//   //云账号AccessKey有所有API访问权限，建议遵循阿里云安全最佳实践，部署在服务端使用RAM子账号或STS，部署在客户端使用STS。
+//   accessKeyId: 'LTAI5RoJ6lXHDDJv',
+//   accessKeySecret: 'UQ5xgbjtwysBDBVUknFRRBFUVGKYDT',
+//   bucket: 'myblog-oss'
+// });
+
 module.exports = {
   build: {
     env: require('./prod.env'),
@@ -34,5 +42,7 @@ module.exports = {
     // In our experience, they generally work as expected,
     // just be aware of this issue when enabling this option.
     cssSourceMap: false
-  }
+  },
+
+  // client:client,
 }
