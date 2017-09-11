@@ -101,21 +101,8 @@
 <script>
 import './cropbox.js'
 import myTools from '../../tools/myTools.js'
-
-
-var client = new OSS.Wrapper({
-  // region: 'oss-cn-beijing',
-  endpoint: 'oss-cn-beijing.aliyuncs.com',
-  //云账号AccessKey有所有API访问权限，建议遵循阿里云安全最佳实践，部署在服务端使用RAM子账号或STS，部署在客户端使用STS。
-  accessKeyId: 'LTAI5RoJ6lXHDDJv',
-  accessKeySecret: 'UQ5xgbjtwysBDBVUknFRRBFUVGKYDT',
-  bucket: 'myblog-oss',
-});
-
-
-
 import schools from './schools.js'
-
+import _asyncUpload from '../../module/OssUpload'
 // import AliyunOssUpload from '../../component/AliyunOssUpload.vue'
 
 
@@ -127,7 +114,6 @@ export default {
     return {
     //请求主机地址
     hostname: '47.94.129.112',
-    ossFolder:'headpics/',
     //进行到的步骤
     step: 2,
 
@@ -150,66 +136,77 @@ export default {
     headpicUpload(){
       const t = this
       let username = localStorage.username || myTools._generateVCode()
-      var _routename = t.ossFolder+username+'.jpg'
-      var _imgFile = $('#upload-file').get(0).files[0];
-      var credentials = ''
-
-      var asyncUpload = async function (){
-        await fetch(`http://${t.hostname}/api/getSTStoken?session_name=${username}`, {
-            method: 'get',
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded"
-            },
-          })
-          .then(re => re.json())
-          .then(re => {
-            credentials = re.data.Credentials
-            console.log(credentials);
-          })
-        // await client.multipartUpload(_routename,_imgFile,)
-        // .then(function (re) {
-        //    if(re.res.status === 200){
-        //      //存头像地址
-        //      t.form.headpic_url = re.res.requestUrls[0]
-        //      fetch(`http://${t.hostname}/api/set_detailInfo`, {
-        //          method: 'post',
-        //          body: 'username=' + localStorage.username + '&name=' + '' + '&address=' + '' + '&birthday=' + '' + '&gender=' + '' + '&school=' + '' + '&headpic_url=' + t.form.headpic_url,
-        //          headers: {
-        //            "Accept": "application/json",
-        //            "Content-Type": "application/x-www-form-urlencoded"
-        //          },
-        //        }).then(re => re.json())
-        //        .then(re => {
-        //          if(re.msg == "success"){
-        //            t.$message({
-        //              message: '头像上传成功',
-        //              type: 'success'
-        //            });
-        //           setTimeout(function () {
-        //             t.step = 3
-        //           },1500)
-        //          }else{
-        //            this.$message({
-        //              message: '头像信息储存失败，请刷新重试',
-        //              type: 'error'
-        //            });
-        //          }
-        //        })
-        //    }
-        //  },function (re) {
-        //    t.$alert('我是不会给你做头像的～。～', '自己上传头像', {
-        //       confirmButtonText: '确定',
-        //       callback: action => {
-        //         t.$message({
-        //           type: 'info',
-        //           message: '自拍一张上传啊，肯定比她萌'
-        //         });
-        //       }
-        //     });
-        //   })
-      }()
+      var imgFile = $('#upload-file').get(0).files[0];
+      var credentials,client
+      _asyncUpload(username,t,imgFile,)
 
 
+      // var _asyncUpload = async function (){
+      //   await fetch(`http://${t.hostname}/api/getSTStoken?session_name=${username}`, {
+      //       method: 'get',
+      //       headers: {
+      //         "Content-Type": "application/x-www-form-urlencoded"
+      //       },
+      //     })
+      //     .then(re => re.json())
+      //     .then(re => {
+      //       credentials = re.data.Credentials
+      //         client = new OSS.Wrapper({
+      //         region: 'oss-cn-beijing',
+      //         accessKeyId:credentials.AccessKeyId,
+      //         accessKeySecret:credentials.AccessKeySecret,
+      //         bucket: 'myblog-oss',
+      //         stsToken :credentials.SecurityToken
+      //       });
+      //     })
+      //
+      //   await client.multipartUpload(_routename,_imgFile,)
+      //   //resolve
+      //   .then(function (re) {
+      //      if(re.res.status === 200){
+      //        //存头像地址
+      //        t.form.headpic_url = re.res.requestUrls[0]
+      //        fetch(`http://${t.hostname}/api/set_detailInfo`, {
+      //            method: 'post',
+      //            body: 'username=' + localStorage.username + '&name=' + '' + '&address=' + '' + '&birthday=' + '' + '&gender=' + '' + '&school=' + '' + '&headpic_url=' + t.form.headpic_url,
+      //            headers: {
+      //              "Accept": "application/json",
+      //              "Content-Type": "application/x-www-form-urlencoded"
+      //            },
+      //          }).then(re => re.json())
+      //          .then(re => {
+      //            if(re.msg == "success"){
+      //              t.$message({
+      //                message: '头像上传成功',
+      //                type: 'success'
+      //              });
+      //             setTimeout(function () {
+      //               t.step = 3
+      //             },1500)
+      //            }else{
+      //              this.$message({
+      //                message: '头像信息储存失败，请刷新重试',
+      //                type: 'error'
+      //              });
+      //            }
+      //          })
+      //      }
+      //    },
+      //    //reject
+      //    function (re) {
+      //      console.log('reject');
+      //      t.$alert('别直接用样例头像啊喂(/ﾟДﾟ)/ ', '自己上传头像', {
+      //         confirmButtonText: '确定',
+      //         callback: action => {
+      //           t.$message({
+      //             type: 'info',
+      //             message: '自拍一张上传啊，肯定比她萌'
+      //           });
+      //         }
+      //       });
+      //     })
+      //
+      // }()
 
     },
     onSubmit() {
