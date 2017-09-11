@@ -109,8 +109,10 @@ var client = new OSS.Wrapper({
   //云账号AccessKey有所有API访问权限，建议遵循阿里云安全最佳实践，部署在服务端使用RAM子账号或STS，部署在客户端使用STS。
   accessKeyId: 'LTAI5RoJ6lXHDDJv',
   accessKeySecret: 'UQ5xgbjtwysBDBVUknFRRBFUVGKYDT',
-  bucket: 'myblog-oss'
+  bucket: 'myblog-oss',
 });
+
+
 
 import schools from './schools.js'
 
@@ -150,41 +152,65 @@ export default {
       let username = localStorage.username || myTools._generateVCode()
       var _routename = t.ossFolder+username+'.jpg'
       var _imgFile = $('#upload-file').get(0).files[0];
-      client.multipartUpload(_routename,_imgFile,)
-      .then(function (re) {
-         if(re.res.status === 200){
-           //存头像地址
-           fetch(`http://${t.hostname}/api/set_detailInfo`, {
-             .then(re => {
-               if(re.msg == "success"){
-                 t.$message({
-                   message: '头像上传成功',
-                   type: 'success'
-                 });
-                setTimeout(function () {
-                  t.step = 3
-                },1500)
-               }else{
-                 this.$message({
-                   message: '头像信息储存失败，请刷新重试',
-                   type: 'error'
-                 });
-               }
-             })
-         }
-       },function (re) {
+      var credentials = ''
 
-         t.$alert('我是不会给你做头像的～。～', '自己上传头像', {
-                  confirmButtonText: '确定',
-                  callback: action => {
-                    t.$message({
-                      type: 'info',
-                      message: '自拍一张上传啊，肯定比她萌'
-                    });
-                  }
-                });
+      var asyncUpload = async function (){
+        await fetch(`http://${t.hostname}/api/getSTStoken?session_name=${username}`, {
+            method: 'get',
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded"
+            },
+          })
+          .then(re => re.json())
+          .then(re => {
+            credentials = re.data.Credentials
+            console.log(credentials);
+          })
+        // await client.multipartUpload(_routename,_imgFile,)
+        // .then(function (re) {
+        //    if(re.res.status === 200){
+        //      //存头像地址
+        //      t.form.headpic_url = re.res.requestUrls[0]
+        //      fetch(`http://${t.hostname}/api/set_detailInfo`, {
+        //          method: 'post',
+        //          body: 'username=' + localStorage.username + '&name=' + '' + '&address=' + '' + '&birthday=' + '' + '&gender=' + '' + '&school=' + '' + '&headpic_url=' + t.form.headpic_url,
+        //          headers: {
+        //            "Accept": "application/json",
+        //            "Content-Type": "application/x-www-form-urlencoded"
+        //          },
+        //        }).then(re => re.json())
+        //        .then(re => {
+        //          if(re.msg == "success"){
+        //            t.$message({
+        //              message: '头像上传成功',
+        //              type: 'success'
+        //            });
+        //           setTimeout(function () {
+        //             t.step = 3
+        //           },1500)
+        //          }else{
+        //            this.$message({
+        //              message: '头像信息储存失败，请刷新重试',
+        //              type: 'error'
+        //            });
+        //          }
+        //        })
+        //    }
+        //  },function (re) {
+        //    t.$alert('我是不会给你做头像的～。～', '自己上传头像', {
+        //       confirmButtonText: '确定',
+        //       callback: action => {
+        //         t.$message({
+        //           type: 'info',
+        //           message: '自拍一张上传啊，肯定比她萌'
+        //         });
+        //       }
+        //     });
+        //   })
+      }()
 
-       })
+
+
     },
     onSubmit() {
       console.log('submit!');
@@ -214,7 +240,7 @@ export default {
     _onSubmitStep3(){
       const t = this
       //做判断处理
-      //
+
 
       //判断通过后
       fetch(`http://${t.hostname}/api/set_detailInfo`, {
