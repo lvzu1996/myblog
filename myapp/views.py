@@ -6,6 +6,7 @@ from models import Pictures,Accounts,Comments,DetailInfo,TestModel,TestModel2
 from django.core import serializers
 from django.views.decorators.csrf import csrf_protect,csrf_exempt
 import functions
+import aliyunSTS
 import hashlib
 import json
 import urllib
@@ -136,6 +137,26 @@ def comment(request):
     return JsonResponse(response)
 
 
+@csrf_protect
+@csrf_exempt
+@require_http_methods(["GET"])
+def stsToken(request):
+    response = {}
+    try:
+        session_name = request.GET.get('session_name')
+        data = aliyunSTS._getSTStoken(session_name)
+        response['Access-Control-Allow-Origin'] = '*'
+        response['data'] = data
+        response['msg'] = 'success'
+        response['error_num'] = 0
+    except  Exception,e:
+        response['msg'] = str(e)
+        response['error_num'] = 1
+
+    return JsonResponse(response)
+
+
+
 # Test api
 @require_http_methods(["GET"])
 def test_model(request):
@@ -175,6 +196,8 @@ def test_model(request):
         response['error_num'] = 1
 
     return JsonResponse(response)
+
+
 
 @require_http_methods(["GET"])
 def test_model_fjy(request):

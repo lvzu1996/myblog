@@ -154,15 +154,7 @@ export default {
       .then(function (re) {
          if(re.res.status === 200){
            //存头像地址
-           t.form.headpic_url = re.res.requestUrls[0]
            fetch(`http://${t.hostname}/api/set_detailInfo`, {
-               method: 'post',
-               body: 'username=' + localStorage.username + '&name=' + '' + '&address=' + '' + '&birthday=' + '' + '&gender=' + '' + '&school=' + '' + '&headpic_url=' + t.form.headpic_url,
-               headers: {
-                 "Accept": "application/json",
-                 "Content-Type": "application/x-www-form-urlencoded"
-               },
-             }).then(re => re.json())
              .then(re => {
                if(re.msg == "success"){
                  t.$message({

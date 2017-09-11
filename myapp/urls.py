@@ -9,6 +9,7 @@ url(r'account_register$', views.account_register, ),
 url(r'account_login$', views.account_login, ),
 url(r'comment$', views.comment, ),
 url(r'set_detailInfo$', views.set_detailInfo, ),
+url(r'getSTStoken$', views.stsToken, ),
 
 #测试api
 url(r'test_model$', views.test_model, ),
