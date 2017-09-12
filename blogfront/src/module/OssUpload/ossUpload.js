@@ -47,7 +47,7 @@ var asyncUpload = async function (username,t,imgFile,){
   //上传头像，调用aliyunOSS的分片上传功能
   await client.multipartUpload(routename,imgFile,)
   .then(function (re) {
-    console.log(re);
+    // console.log(re);
     //如果上传成功
      if(re.res.status === 200){
        //从返回的数据中获取头像地址并储存至服务器数据库中
@@ -77,26 +77,19 @@ var asyncUpload = async function (username,t,imgFile,){
             * 保存到服务器失败了，aliyunOSS bucket中就会多一个无人认领的文件
            **/
            else{
-             this.$message({
+             t.$message({
                message: '头像信息储存失败，请刷新重试',
                type: 'error'
              });
            }
          })
-     }
-   },
-   //图片上传失败
-   //TODO 还没有对上传失败和未选择图片这两种情况进行区分，默认处理了未选择图片这个错误
-   function (re) {
-     console.log('reject');
-     t.$alert('别直接用样例头像啊喂(/ﾟДﾟ)/ ', '自己上传头像', {
-        confirmButtonText: '确定',
-        callback: action => {
-          t.$message({
-            type: 'info',
-            message: '自拍一张上传啊，肯定比她萌'
-          });
-        }
+       }
+     })
+    //上传至oss失败
+    .catch(function (err) {
+      t.$notify.error({
+           title: '头像上传错误',
+           message: err.toString()
       });
     })
 

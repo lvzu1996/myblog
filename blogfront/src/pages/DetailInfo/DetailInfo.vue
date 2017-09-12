@@ -78,7 +78,6 @@
               <div class="spinner" style="display: none">Loading...</div>
             </div>
             <div class="action">
-              <!-- <input type="file" id="file" style=" width: 200px">-->
               <div class="new-contentarea tc"> <a href="javascript:void(0)" class="upload-img">
                 <label for="upload-file">上传图像</label>
                 </a>
@@ -135,6 +134,7 @@ export default {
     },
 
     cropper:'',
+    upFile:'',
   }
 },
 
@@ -143,17 +143,31 @@ export default {
     headpicUpload(){
       const t = this
       let username = localStorage.username
-      var imgFile = $('#upload-file').get(0).files[0];
+
+      if(!t.upFile){
+        //做没上传自己照片的提示
+        t.$alert('别直接用样例头像啊喂(/ﾟДﾟ)/ ', '自己上传头像', {
+           confirmButtonText: '确定',
+           callback: action => {
+             t.$message({
+               type: 'info',
+               message: '自拍一张上传啊，肯定比她萌'
+             });
+           }
+         });
+         return
+      }
+
+      if(!t._isImg()){
+        return
+      }
+
       var credentials,client
       var imgBlob = myTools._convertBase64UrlToBlob(t.cropper.getDataURL());
-      var imgFile = new File([imgBlob], "img.png")
-
-      _asyncUpload(username,t,imgFile)
+      var cutImgFile = new File([imgBlob], "img.png")
+      _asyncUpload(username,t,cutImgFile)
     },
 
-    onSubmit() {
-      console.log('submit!');
-    },
 
     querySearch(queryString, cb) {
       var schools = this.schools;
@@ -199,8 +213,22 @@ export default {
             },1500)
           }
         })
-
     },
+
+    _isImg(){
+      const t = this
+      var _upFile = this.upFile
+      if(!(_upFile.type == 'image/jpeg' || _upFile.type == 'image/png')){
+        //做没上传自己照片的提示
+        t.$alert('请上传JPEG或者PNG格式的玩意儿(/ﾟДﾟ)/ ', '这特么是什么？', {
+           confirmButtonText: '确定',
+         });
+         return false
+      }
+      return true
+    },
+
+
   },
 
 
@@ -229,6 +257,9 @@ export default {
         }
         t.cropper = $('.imageBox').cropbox(options);
         $('#upload-file').on('change', function(){
+          t.upFile = this.files[0]
+          //测试上传文件的格式
+          t._isImg()
           var reader = new FileReader();
           reader.onload = function(e) {
             options.imgSrc = e.target.result;
@@ -238,6 +269,9 @@ export default {
           // this.files = [];
         })
         $('#btnCrop').on('click', function(){
+          if(!t._isImg()){
+            return
+          }
           var img = t.cropper.getDataURL();
           $('.cropped').html('');
           $('.cropped').append('<img src="'+img+'" align="absmiddle" style="width:64px;margin-top:4px;border-radius:64px;box-shadow:0px 0px 12px #7E7E7E;" ><p>64px*64px</p>');
@@ -245,10 +279,14 @@ export default {
           $('.cropped').append('<img src="'+img+'" align="absmiddle" style="width:180px;margin-top:4px;border-radius:180px;box-shadow:0px 0px 12px #7E7E7E;"><p>180px*180px</p>');
         })
         $('#btnZoomIn').on('click', function(){
-          t.cropper.zoomIn();
+          if(t._isImg()){
+            t.cropper.zoomIn();
+          }
         })
         $('#btnZoomOut').on('click', function(){
-          t.cropper.zoomOut();
+          if(t._isImg()){
+            t.cropper.zoomOut();
+          }
         })
     },
 
