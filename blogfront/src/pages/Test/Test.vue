@@ -32,29 +32,10 @@
      ></el-autocomplete>
     </div> -->
 
-    <div class="">
-
-      <div class="container">
-        <div class="imageBox">
-          <div class="thumbBox"></div>
-          <div class="spinner" style="display: none">Loading...</div>
-        </div>
-        <div class="action">
-          <!-- <input type="file" id="file" style=" width: 200px">-->
-          <div class="new-contentarea tc"> <a href="javascript:void(0)" class="upload-img">
-            <label for="upload-file">上传图像</label>
-            </a>
-            <input type="file" class="" name="upload-file" id="upload-file" />
-          </div>
-          <input type="button" id="btnCrop"  class="Btnsty_peyton" value="裁切">
-          <input type="button" id="btnZoomIn" class="Btnsty_peyton" value="+"  >
-          <input type="button" id="btnZoomOut" class="Btnsty_peyton" value="-" >
-        </div>
-        <div class="cropped"></div>
-      </div>
-
-
+    <div v-for="elem,index in priDir" :key="elem.key">
+      {{priDir[index]}}
     </div>
+    <input type="button" @click="_addOne">
 
 
   </div>
@@ -127,8 +108,12 @@ export default {
       var img = new Image()
       img.url = x.target.value
       console.log(img);
+    },
 
-    }
+    _addOne(){
+      console.log("haha");
+      this.priDir.push('哈哈')
+    },
 
   },
 

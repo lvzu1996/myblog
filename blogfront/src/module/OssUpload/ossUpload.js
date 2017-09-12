@@ -10,14 +10,19 @@
   asyncUpload(username , t , imgFile)
  */
 
+//导入config文件中的OSS相关的设置
 import _config_ from '../../../config'
 
 var ossConfig = _config_._ossConfig_
 
+//函数大体上分为两个部分
+//第一个部分是从服务器请求临时accessKey，accessSecrete和stsToken
+//第二个部分是通过第一步中请求到的临时秘钥访问阿里云oss，并进行头像的上传
 var asyncUpload = async function (username,t,imgFile,){
 
   var client,credentials
 
+  //从服务器请求临时accessKey，accessSecrete和stsToken
   await fetch(`http://${ossConfig.hostname}/api/getSTStoken?session_name=${username}`, {
       method: 'get',
       headers: {
@@ -26,7 +31,7 @@ var asyncUpload = async function (username,t,imgFile,){
     })
     .then(re => re.json())
     .then(re => {
-      credentials = re.data.Credentials
+        credentials = re.data.Credentials
         client = new OSS.Wrapper({
         region: ossConfig.region,
         bucket: ossConfig.bucket,
@@ -36,13 +41,16 @@ var asyncUpload = async function (username,t,imgFile,){
       });
     })
 
+    //上传至oss时           文件夹      /  文件名    .文件后缀
   var routename = ossConfig.ossFolder + username + '.jpg'
 
+  //上传头像，调用aliyunOSS的分片上传功能
   await client.multipartUpload(routename,imgFile,)
-  //resolve
   .then(function (re) {
+    console.log(re);
+    //如果上传成功
      if(re.res.status === 200){
-       //存头像地址
+       //从返回的数据中获取头像地址并储存至服务器数据库中
        t.form.headpic_url = re.res.requestUrls[0]
        fetch(`http://${t.hostname}/api/set_detailInfo`, {
            method: 'post',
@@ -51,8 +59,10 @@ var asyncUpload = async function (username,t,imgFile,){
              "Accept": "application/json",
              "Content-Type": "application/x-www-form-urlencoded"
            },
-         }).then(re => re.json())
+         })
+         .then(re => re.json())
          .then(re => {
+           //如果头像地址储存成功
            if(re.msg == "success"){
              t.$message({
                message: '头像上传成功',
@@ -61,7 +71,12 @@ var asyncUpload = async function (username,t,imgFile,){
             setTimeout(function () {
               t.step = 3
             },1500)
-           }else{
+           }
+           /** 储存失败
+            * 这里会有一个问题，因为如果图片上传至aliyunOSS成功了但是
+            * 保存到服务器失败了，aliyunOSS bucket中就会多一个无人认领的文件
+           **/
+           else{
              this.$message({
                message: '头像信息储存失败，请刷新重试',
                type: 'error'
@@ -70,7 +85,8 @@ var asyncUpload = async function (username,t,imgFile,){
          })
      }
    },
-   //reject
+   //图片上传失败
+   //TODO 还没有对上传失败和未选择图片这两种情况进行区分，默认处理了未选择图片这个错误
    function (re) {
      console.log('reject');
      t.$alert('别直接用样例头像啊喂(/ﾟДﾟ)/ ', '自己上传头像', {

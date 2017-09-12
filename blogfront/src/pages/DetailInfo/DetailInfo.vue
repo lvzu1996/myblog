@@ -38,7 +38,7 @@
              v-model="form.birthday"
              type="date"
              placeholder="选择日期"
-             :picker-options="pickerOptions0">
+             :picker-options="pickerOptions">
            </el-date-picker>
           </el-form-item>
 
@@ -128,101 +128,40 @@ export default {
     },
     schools: '',
 
+    pickerOptions:{
+      disabledDate(time) {
+        return time.getTime() > Date.now() - 8.64e7;
+      }
+    },
 
+    cropper:'',
   }
 },
 
   methods: {
+
     headpicUpload(){
       const t = this
-      let username = localStorage.username || myTools._generateVCode()
+      let username = localStorage.username
       var imgFile = $('#upload-file').get(0).files[0];
       var credentials,client
-      _asyncUpload(username,t,imgFile,)
+      var imgBlob = myTools._convertBase64UrlToBlob(t.cropper.getDataURL());
+      var imgFile = new File([imgBlob], "img.png")
 
-
-      // var _asyncUpload = async function (){
-      //   await fetch(`http://${t.hostname}/api/getSTStoken?session_name=${username}`, {
-      //       method: 'get',
-      //       headers: {
-      //         "Content-Type": "application/x-www-form-urlencoded"
-      //       },
-      //     })
-      //     .then(re => re.json())
-      //     .then(re => {
-      //       credentials = re.data.Credentials
-      //         client = new OSS.Wrapper({
-      //         region: 'oss-cn-beijing',
-      //         accessKeyId:credentials.AccessKeyId,
-      //         accessKeySecret:credentials.AccessKeySecret,
-      //         bucket: 'myblog-oss',
-      //         stsToken :credentials.SecurityToken
-      //       });
-      //     })
-      //
-      //   await client.multipartUpload(_routename,_imgFile,)
-      //   //resolve
-      //   .then(function (re) {
-      //      if(re.res.status === 200){
-      //        //存头像地址
-      //        t.form.headpic_url = re.res.requestUrls[0]
-      //        fetch(`http://${t.hostname}/api/set_detailInfo`, {
-      //            method: 'post',
-      //            body: 'username=' + localStorage.username + '&name=' + '' + '&address=' + '' + '&birthday=' + '' + '&gender=' + '' + '&school=' + '' + '&headpic_url=' + t.form.headpic_url,
-      //            headers: {
-      //              "Accept": "application/json",
-      //              "Content-Type": "application/x-www-form-urlencoded"
-      //            },
-      //          }).then(re => re.json())
-      //          .then(re => {
-      //            if(re.msg == "success"){
-      //              t.$message({
-      //                message: '头像上传成功',
-      //                type: 'success'
-      //              });
-      //             setTimeout(function () {
-      //               t.step = 3
-      //             },1500)
-      //            }else{
-      //              this.$message({
-      //                message: '头像信息储存失败，请刷新重试',
-      //                type: 'error'
-      //              });
-      //            }
-      //          })
-      //      }
-      //    },
-      //    //reject
-      //    function (re) {
-      //      console.log('reject');
-      //      t.$alert('别直接用样例头像啊喂(/ﾟДﾟ)/ ', '自己上传头像', {
-      //         confirmButtonText: '确定',
-      //         callback: action => {
-      //           t.$message({
-      //             type: 'info',
-      //             message: '自拍一张上传啊，肯定比她萌'
-      //           });
-      //         }
-      //       });
-      //     })
-      //
-      // }()
-
+      _asyncUpload(username,t,imgFile)
     },
+
     onSubmit() {
       console.log('submit!');
     },
-    pickerOptions0: {
-      disabledDate(time) {
-        return time.getTime() < Date.now() - 8.64e7;
-      }
-    },
+
     querySearch(queryString, cb) {
       var schools = this.schools;
       var results = queryString ? schools.filter(this.createFilter(queryString)) : schools;
       // 调用 callback 返回建议列表的数据
       cb(results);
     },
+
     createFilter(queryString) {
       return (school) => {
         return (school.value.indexOf(queryString.toLowerCase()) === 0);
@@ -237,7 +176,6 @@ export default {
     _onSubmitStep3(){
       const t = this
       //做判断处理
-
 
       //判断通过后
       fetch(`http://${t.hostname}/api/set_detailInfo`, {
@@ -267,36 +205,50 @@ export default {
 
 
     mounted() {
+
+      const t = this
+      if(!localStorage.username){
+        t.$message({
+          message: '您还未注册！请先注册',
+          type: 'warning'
+        });
+        setTimeout(function () {
+          t.$router.push({ path:'/register' })
+        },1500)
+        return
+      }
+
       this.schools=schools
-      console.log("DetailInfo mounted");
+      // console.log("DetailInfo mounted");
+
         var options =
         {
           thumbBox: '.thumbBox',
           spinner: '.spinner',
           imgSrc: '../../../static/imgs/avatar.jpg'
         }
-        var cropper = $('.imageBox').cropbox(options);
+        t.cropper = $('.imageBox').cropbox(options);
         $('#upload-file').on('change', function(){
           var reader = new FileReader();
           reader.onload = function(e) {
             options.imgSrc = e.target.result;
-            cropper = $('.imageBox').cropbox(options);
+            t.cropper = $('.imageBox').cropbox(options);
           }
           reader.readAsDataURL(this.files[0]);
           // this.files = [];
         })
         $('#btnCrop').on('click', function(){
-          var img = cropper.getDataURL();
+          var img = t.cropper.getDataURL();
           $('.cropped').html('');
           $('.cropped').append('<img src="'+img+'" align="absmiddle" style="width:64px;margin-top:4px;border-radius:64px;box-shadow:0px 0px 12px #7E7E7E;" ><p>64px*64px</p>');
           $('.cropped').append('<img src="'+img+'" align="absmiddle" style="width:128px;margin-top:4px;border-radius:128px;box-shadow:0px 0px 12px #7E7E7E;"><p>128px*128px</p>');
           $('.cropped').append('<img src="'+img+'" align="absmiddle" style="width:180px;margin-top:4px;border-radius:180px;box-shadow:0px 0px 12px #7E7E7E;"><p>180px*180px</p>');
         })
         $('#btnZoomIn').on('click', function(){
-          cropper.zoomIn();
+          t.cropper.zoomIn();
         })
         $('#btnZoomOut').on('click', function(){
-          cropper.zoomOut();
+          t.cropper.zoomOut();
         })
     },
 

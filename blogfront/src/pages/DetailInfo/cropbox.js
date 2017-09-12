@@ -1,12 +1,6 @@
 
 "use strict";
-// (function (factory) {
-//     if (typeof define === 'function' && define.amd) {
-//         define(['jquery'], factory);
-//     } else {
-//         factory(jQuery);
-//     }
-// }(function ($) {
+
     var cropbox = function(options, el){
         var el = el || $(options.imageBox),
             obj =
@@ -133,5 +127,3 @@
     jQuery.fn.cropbox = function(options){
         return new cropbox(options, this);
     };
-
-// }));
