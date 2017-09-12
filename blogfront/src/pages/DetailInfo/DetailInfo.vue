@@ -61,8 +61,8 @@
 
     </div>
 
-
-<div id="detailInfo-main-part2" v-if="step==2">
+    <transition name="fade">
+      <div id="detailInfo-main-part2" v-if="step===2">
       <div class="detailInfo-step2-div">
         <el-steps :space="200" :active="2">
           <el-step title="步骤 1" icon="edit"></el-step>
@@ -70,20 +70,20 @@
           <el-step title="步骤 3" icon="information"></el-step>
         </el-steps>
       </div>
-      <transition name="fade">
-        <div class="headpic-uploader">
+        <div class="headpic-uploader move-lvzu">
           <div class="container">
             <div class="imageBox">
               <div class="thumbBox"></div>
               <div class="spinner" style="display: none">Loading...</div>
             </div>
             <div class="action">
-              <div class="new-contentarea tc"> <a href="javascript:void(0)" class="upload-img">
-                <label for="upload-file">上传图像</label>
+              <div class="new-contentarea tc">
+                <a href="javascript:void(0)" class="upload-img">
+                <label for="upload-file">选择头像</label>
                 </a>
                 <input type="file"  class="" name="upload-file" id="upload-file" />
               </div>
-              <input type="button" id="btnCrop"  class="Btnsty_peyton" value="裁切">
+              <input type="button" id="btnCrop"  class="Btnsty_peyton" value="裁剪">
               <input type="button" id="btnZoomIn" class="Btnsty_peyton" value="+"  >
               <input type="button" id="btnZoomOut" class="Btnsty_peyton" value="-" >
               <input type="button" id="headpic-sub-button"  value="就决定是这个头像了" @click="_onSubmitStep2">
@@ -91,8 +91,8 @@
             <div class="cropped"></div>
           </div>
         </div>
-      </transition>
-</div>
+      </div>
+    </transition>
 
   </div>
 </template>
@@ -298,7 +298,7 @@ export default {
       t.cropper.zoomOut();
     })
 
-  //mouted结束括号  
+  //mouted结束括号
   },
 
 

@@ -31,12 +31,8 @@
        @select="handleSelect"
      ></el-autocomplete>
     </div> -->
-
-    <div v-for="elem,index in priDir" :key="elem.key">
-      {{priDir[index]}}
-    </div>
-    <input type="button" @click="_addOne">
-
+    <el-progress type="circle" :percentage="progress" v-if="!status"></el-progress>
+    <el-progress class="move-lvzu" type="circle" :percentage="100" status="success" v-if="status" width="150"></el-progress>
 
   </div>
 </template>
@@ -72,6 +68,9 @@ export default {
 
       //图片上传测试
       file:'',
+
+      progress:'0',
+      status:false,
     }
   },
 
@@ -110,50 +109,18 @@ export default {
       console.log(img);
     },
 
-    _addOne(){
-      console.log("haha");
-      this.priDir.push('哈哈')
-    },
-
   },
 
   mounted() {
-      this.schools=schools
+    const t = this
+    setInterval(function () {
+      if(t.progress == 100){
+        t.status = true
+      }
+      t.progress++;
+    },100)
 
-      $(window).load(function() {
-      	var options =
-      	{
-      		thumbBox: '.thumbBox',
-      		spinner: '.spinner',
-      		imgSrc: 'http://ovfey247f.bkt.clouddn.com/register/detailInfo/example_headpic.jpg'
-      	}
-      	var cropper = $('.imageBox').cropbox(options);
-      	$('#upload-file').on('change', function(){
-      		var reader = new FileReader();
-      		reader.onload = function(e) {
-      			options.imgSrc = e.target.result;
-      			cropper = $('.imageBox').cropbox(options);
-      		}
-      		reader.readAsDataURL(this.files[0]);
-      		// this.files = [];
-      	})
-      	$('#btnCrop').on('click', function(){
-      		var img = cropper.getDataURL();
-          console.log(img);
-      		$('.cropped').html('');
-      		$('.cropped').append('<img src="'+img+'" align="absmiddle" style="width:64px;margin-top:4px;border-radius:64px;box-shadow:0px 0px 12px #7E7E7E;" ><p>64px*64px</p>');
-      		$('.cropped').append('<img src="'+img+'" align="absmiddle" style="width:128px;margin-top:4px;border-radius:128px;box-shadow:0px 0px 12px #7E7E7E;"><p>128px*128px</p>');
-      		$('.cropped').append('<img src="'+img+'" align="absmiddle" style="width:180px;margin-top:4px;border-radius:180px;box-shadow:0px 0px 12px #7E7E7E;"><p>180px*180px</p>');
-      	})
-      	$('#btnZoomIn').on('click', function(){
-      		cropper.zoomIn();
-      	})
-      	$('#btnZoomOut').on('click', function(){
-      		cropper.zoomOut();
-      	})
-      });
-
-  }
+  },
 
 }
 </script>
@@ -310,6 +277,19 @@ a.upload-img:hover{
 .tc{text-align:center;}
 
 
-
+//切换界面时的animation
+@-webkit-keyframes move-lvzu {
+    0% {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+//animation的使用类  绑定后会有切换的效果
+.move-lvzu {
+    -webkit-animation: move-lvzu .8s cubic-bezier(.4, 0, .2, 1) 0s 1;
+    animation: move-lvzu .8s cubic-bezier(.4, 0, .2, 1) 0s 1;
+}
 
 </style>

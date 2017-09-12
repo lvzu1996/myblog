@@ -100,11 +100,15 @@
     left: 17.25rem;
   }
 
+
+
 .bottom{
-  background-color: #91CC34;
   height: 30rem;
   display: flex;
   flex-direction: column;
+  background-image: -webkit-linear-gradient(top left, #C2FFD8 10%, #465EFB 100%);
+  background-image: -o-linear-gradient(top left, #C2FFD8 10%, #465EFB 100%);
+  background-image: linear-gradient(to bottom right, #C2FFD8 10%, #465EFB 100%);
 }
 
 .bottom-single{

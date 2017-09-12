@@ -213,3 +213,19 @@ a.upload-img:hover{
 }
 
 .tc{text-align:center;}
+
+//切换界面时的animation
+@-webkit-keyframes move-lvzu {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+    }
+}
+//animation的使用类  绑定后会有切换的效果
+.move-lvzu {
+    -webkit-animation: move-lvzu 1.5s cubic-bezier(.4, 0, .2, 1) 0s 1;
+    animation: move-lvzu 1.5s cubic-bezier(.4, 0, .2, 1) 0s 1;
+}
