@@ -220,7 +220,7 @@ export default {
       var _upFile = this.upFile
       if(!(_upFile.type == 'image/jpeg' || _upFile.type == 'image/png')){
         //做没上传自己照片的提示
-        t.$alert('请上传JPEG或者PNG格式的玩意儿(/ﾟДﾟ)/ ', '这特么是什么？', {
+        t.$alert('请上传JPEG或者PNG格式的文件(/ﾟДﾟ)/ ', '这特么是什么玩意儿？', {
            confirmButtonText: '确定',
          });
          return false
