@@ -42,7 +42,7 @@ var asyncUpload = async function (username,t,imgFile,){
     })
 
     //上传至oss时           文件夹      /  文件名    .文件后缀
-  var routename = ossConfig.ossFolder + username + '.jpg'
+  var routename = ossConfig.ossFolder + username + '.png'
 
   //上传头像，调用aliyunOSS的分片上传功能
   await client.multipartUpload(routename,imgFile,)

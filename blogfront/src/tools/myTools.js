@@ -18,11 +18,11 @@ var _getRunTime = function () {
 }
 
 /**
- * 将以base64的图片url数据转换为Blob
+ * 把base64编码数据转换为Blob对象最后返回File对象
  * @param urlData
- *            用url方式表示的base64图片数据
+ * 用url方式表示的base64图片数据
  */
-function _convertBase64UrlToBlob(urlData){
+function _convertBase64UrlToFile(urlData){
 
     var bytes=window.atob(urlData.split(',')[1]);        //去掉url的头，并转换为byte
 
@@ -32,12 +32,24 @@ function _convertBase64UrlToBlob(urlData){
     for (var i = 0; i < bytes.length; i++) {
         ia[i] = bytes.charCodeAt(i);
     }
-
-    return new Blob( [ab] , {type : 'image/png'});
+    var imgBlob = new Blob( [ab] , {type : 'image/png'});
+    var imgFile = new File( [imgBlob] , 'img.png')
+    // return new Blob( [ab] , {type : 'image/png'});
+    return imgFile
 }
 
 
-
+function _getImgName(type){
+  if(type == 'image/png'){
+    return 'img.png'
+  }
+  else if (type == 'image/jpeg') {
+    return 'img.jpg'
+  }
+  else if (type == 'image/svg+xml') {
+    return 'img.svg'
+  }
+}
 
 
 
@@ -45,7 +57,8 @@ var myTools = {
   _generateVCode:_generateVCode,
   _logRunTime:_logRunTime,
   _getRunTime:_getRunTime,
-  _convertBase64UrlToBlob:_convertBase64UrlToBlob,
+  _convertBase64UrlToFile:_convertBase64UrlToFile,
+  _getImgName:_getImgName,
 }
 
 

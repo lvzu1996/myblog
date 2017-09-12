@@ -29,9 +29,17 @@
                     canvas.width = width;
                     canvas.height = height;
                     var context = canvas.getContext("2d");
-                    context.drawImage(this.image, 0, 0, sw, sh, dx, dy, dw, dh);
-                    var imageData = canvas.toDataURL('image/png');
-                    return imageData;
+
+                    try{
+                      context.drawImage(this.image, 0, 0, sw, sh, dx, dy, dw, dh);
+                      var imageData = canvas.toDataURL('image/png');
+                      return imageData
+                    }
+                    // TODO 文件种类异常处理
+                    catch(err){
+                      // console.log(err);
+                    }
+
                 },
                 getBlob: function()
                 {
