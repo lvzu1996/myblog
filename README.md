@@ -42,16 +42,23 @@ apps
 # git clone
 git clone https://github.com/lvzu1996/myblog.git
 
-# django yilai
+# mysql installation
+sudo apt-get install mysql-server
+apt-get isntall mysql-client
+sudo apt-get install libmysqlclient-dev
+
+# django relience
 pip install aliyun-python-sdk-sts
 pip install django-cors-headers
 pip install mysqlclient
 pip install MySQL-python
+
 # install dependencies
 cd blogfront
 npm install
 
 # build for production with minification
+cd blogfront
 npm run build
 python manage.py collectstatic
 
