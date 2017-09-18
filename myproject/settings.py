@@ -91,7 +91,8 @@ DATABASES = {
         'NAME': 'myblog',
         'USER': 'root',
         'PASSWORD': 'wlwdaybtx',
-        'HOST': '127.0.0.1',
+        'HOST': 'lvzu.site',
+		'PORT':'3306'
     }
 }
 
