@@ -33,7 +33,7 @@ apps
 ├── models.py  --model文件，用于自动生成mysql表
 ├── tests.py
 ├── urls.py
-├── views.py  --app页面，本例中展示了两个接口
+├── views.py  --app页面，本例中展示了两个接口  
 
 
 ## Build Setup
