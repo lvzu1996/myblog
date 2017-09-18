@@ -30,6 +30,11 @@ ALLOWED_HOSTS = [
 	'127.0.0.1',
 	'47.94.129.112',
 	'lvzu.site',
+	'www.lvzu.site',
+	'gakki.ink',
+	'www.gakki.ink',
+	'vuejs.club',
+	'www.vuejs.club',
 ]
 
 

@@ -116,22 +116,19 @@ export default {
 	},
 
   mounted() {
-
-
-    const t = this
     let temp = 1
-    t.str1 = ' '
+    this.str1 = ' '
 
     $('#typing1').css('height','3rem')
 
     //执行8次
     // ''--->'只为守护世界和平'
-    setTimeout(function () {
+    setTimeout(() => {
       $('#typing1').css('height','auto')
-      var interval = setInterval(function () {
-        t.str1 = t.typingStr1.substring(0,temp)
+      var interval = setInterval(() => {
+        this.str1 = this.typingStr1.substring(0,temp)
         temp ++;
-        if(temp>t.typingStr1.length){
+        if(temp>this.typingStr1.length){
           clearInterval(interval);
         }
       },130)
@@ -140,9 +137,9 @@ export default {
 
     //执行6次
     //'只为守护世界和平'--->'只为'
-    setTimeout(function () {
-      var interval = setInterval(function () {
-        t.str1 = t.typingStr1.substring(0,temp)
+    setTimeout(() => {
+      var interval = setInterval(() =>  {
+        this.str1 = this.typingStr1.substring(0,temp)
         temp --;
         if(temp<2){
           clearInterval(interval);
@@ -153,11 +150,11 @@ export default {
 
     //执行5次
     //'只为'--->'只为让你少加班'
-    setTimeout(function () {
-      var interval = setInterval(function () {
-        t.str1 = t.typingStr2.substring(0,temp)
+    setTimeout(() =>  {
+      var interval = setInterval(() =>  {
+        this.str1 = this.typingStr2.substring(0,temp)
         temp ++;
-        if(temp>t.typingStr2.length){
+        if(temp>this.typingStr2.length){
           clearInterval(interval);
         }
       },150)
@@ -165,9 +162,9 @@ export default {
 
     //执行7次
     //'只为让你少加班'--->''
-    setTimeout(function () {
-      var interval = setInterval(function () {
-        t.str1 = t.typingStr2.substring(0,temp)
+    setTimeout(() =>  {
+      var interval = setInterval(() =>  {
+        this.str1 = this.typingStr2.substring(0,temp)
         temp --;
         if(temp<0){
           clearInterval(interval);
@@ -179,33 +176,33 @@ export default {
 
     //执行8次
     //''--->'只为这样的你'
-    setTimeout(function () {
+    setTimeout(() =>  {
       $('#typing1').css('height','auto')
-      var interval = setInterval(function () {
-        t.str1 = t.typingStr3.substring(0,temp)
+      var interval = setInterval(() =>  {
+        this.str1 = this.typingStr3.substring(0,temp)
         temp ++;
-        if(temp>t.typingStr3.length){
+        if(temp>this.typingStr3.length){
           clearInterval(interval);
         }
       },120)
     },11000)
 
-    setTimeout(function () {
+    setTimeout(() =>  {
       let type = 0;
       let addFlag = true;
       let pauseFlag = false;
       temp = 0;
 
-      var interval = setInterval(function() {
+      var interval = setInterval(() =>  {
       if (!pauseFlag) {
-          t.str1 = t.typingStr3 + t.peopleType[type].substring(0, temp)
+          this.str1 = this.typingStr3 + this.peopleType[type].substring(0, temp)
           if (addFlag) {
             temp++;
-            if (temp == t.peopleType[type].length+1) {
+            if (temp == this.peopleType[type].length+1) {
               addFlag = false
               temp --;
               pauseFlag = !pauseFlag
-              setTimeout(function () {
+              setTimeout(() =>  {
                 pauseFlag = !pauseFlag
               },2000)
             }
@@ -215,7 +212,7 @@ export default {
               addFlag = true
               temp++;
               pauseFlag = !pauseFlag
-              setTimeout(function () {
+              setTimeout(() =>  {
                 pauseFlag = !pauseFlag
               },2000)
               type++;
