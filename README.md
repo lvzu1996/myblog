@@ -1,7 +1,7 @@
 # this is my first full-stack program
 
 >@author:lvzu
->@Updated date:2017/09/11
+>@Updated date:2017/09/18
 >@say something : hope to become a full-stack programer!
 
 ## Technology Stack
@@ -48,6 +48,7 @@ apt-get isntall mysql-client
 sudo apt-get install libmysqlclient-dev
 
 # django relience
+
 pip install aliyun-python-sdk-sts
 pip install django-cors-headers
 pip install mysqlclient
