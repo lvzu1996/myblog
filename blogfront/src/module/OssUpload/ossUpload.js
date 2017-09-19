@@ -7,17 +7,17 @@
   * @param username 作为请求stsToken的session_name 本例设置为用户名
   * @param t vue指针this
   * @param imgFile 上传至aliyunOSS的图片对象，必须为文件对象
-  asyncUpload(username , t , imgFile)
+    asyncUpload(username , t , imgFile)
  */
 
 //导入config文件中的OSS相关的设置
 import _config_ from '../../../config'
-
 var ossConfig = _config_._ossConfig_
 
-//函数大体上分为两个部分
-//第一个部分是从服务器请求临时accessKey，accessSecrete和stsToken
-//第二个部分是通过第一步中请求到的临时秘钥访问阿里云oss，并进行头像的上传
+/*函数大体上分为两个部分
+ *第一个部分是从服务器请求临时accessKey，accessSecrete和stsToken
+ *第二个部分是通过第一步中请求到的临时秘钥访问阿里云oss，并进行头像的上传
+ */
 var asyncUpload = async function (username,t,imgFile,){
 
   var client,credentials

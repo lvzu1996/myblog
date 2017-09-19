@@ -109,11 +109,11 @@
  *第二部分是个人信息填写
 
  */
+
 import './cropbox.js'
 import myTools from '../../tools/myTools.js'
 import schools from './schools.js'
-import _asyncUpload from '../../module/OssUpload'
-// import AliyunOssUpload from '../../component/AliyunOssUpload.vue'
+import asyncUpload from '../../module/OssUpload'
 
 
 export default {
@@ -172,7 +172,7 @@ export default {
       }
       var credentials, client
       var imgFile = myTools._convertBase64UrlToFile(t.cropper.getDataURL());
-      _asyncUpload(username, t, imgFile)
+      asyncUpload(username, t, imgFile)
     },
 
     querySearch(queryString, cb) {

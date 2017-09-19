@@ -1,12 +1,27 @@
+/*
+ @Author:lvzu
+ @Update:2017/9/19
+
+本文件是vue-router的配置文件
+
+在导入各页面时使用的是Vue的懒加载
+如下：
+const Home = () => import('@/pages/Home/Home')
+
+懒加载官方文档：
+https://router.vuejs.org/en/advanced/lazy-loading.html#
+
+ */
 import Vue from 'vue'
 import Router from 'vue-router'
-import Hello from '@/pages/Hello/Hello'
-import Home from '@/pages/Home/Home'
-import Main from '@/pages/Main/Main'
-import Register from '@/pages/Register/Register'
-import Lvzu from '@/pages/Lvzu/Lvzu'
-import Test from '@/pages/Test/Test'
-import DetailInfo from '@/pages/DetailInfo/DetailInfo'
+
+const Home = () => import('@/pages/Home/Home')
+const Main = () => import('@/pages/Main/Main')
+const Hello = () => import('@/pages/Hello/Hello')
+const Register = () => import('@/pages/Register/Register')
+const Lvzu = () => import('@/pages/Lvzu/Lvzu')
+const Test = () => import('@/pages/Test/Test')
+const DetailInfo = () => import('@/pages/DetailInfo/DetailInfo')
 
 Vue.use(Router)
 
