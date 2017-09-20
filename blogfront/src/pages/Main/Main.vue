@@ -110,7 +110,10 @@ export default {
 
     //监听滚轮 设置header-fa的background-color
       window.onscroll = function () {
-        let opacity = document.body.scrollTop/212
+        // 页面指定了DTD，即指定了DOCTYPE时，使用document.documentElement。
+        // 页面没有DTD，即没指定DOCTYPE时，使用document.body。
+        // let opacity = document.body.scrollTop/212
+        let opacity = document.documentElement.scrollTop/212
         $('#header-fa').css('background-color',`rgba(32, 160, 255,${opacity})`)
       }
 	},

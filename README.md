@@ -39,6 +39,23 @@ apps
 ## Build Setup
 
 ``` bash
+
+
+<VirtualHost *:80>
+        DocumentRoot /var/www/myblog/myproject
+        ServerName 127.0.0.1
+
+        Alias /static/ /var/www/myblog/static/
+
+<Directory /var/www/myblog/static/>
+        Require all granted
+</Directory>
+
+        WSGIScriptAlias / /var/www/myblog/myproject/wsgi.py
+
+</VirtualHost>
+                    
+
 # git clone
 git clone https://github.com/lvzu1996/myblog.git
 
