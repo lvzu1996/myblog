@@ -35,6 +35,8 @@ ALLOWED_HOSTS = [
 	'www.gakki.ink',
 	'vuejs.club',
 	'www.vuejs.club',
+	'world-elite.site',
+	'https://world-elite.site'
 ]
 
 
